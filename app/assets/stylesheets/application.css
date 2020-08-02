@@ -13,3 +13,64 @@
  *= require_tree .
  *= require_self
  */
+
+ :root{
+    --aqua: #00a6af;
+    --aqua-hover: #00969e;
+}
+
+.bg-aqua {
+    background-color: var(--aqua) !important;
+}
+
+.bg-image-main {
+    background-image: url('background.jpg');
+    height:100%;
+    width: 100%;
+    position: fixed;
+    background-repeat: no-repeat;
+}
+
+.bg-grey-alt {
+    background-color: #1f2c30;
+}
+
+.full-size {
+    height: 96vh;  
+}
+
+.btn-aqua {
+    border-color:  var(--aqua) !important;
+    color: #ffffff !important;
+}
+
+.text-white{
+    color:#ffffff;
+}
+
+.btn-aqua:hover {
+    border-color: none;
+    background-color: var(--aqua-hover);
+}
+
+.btn-awic {
+    color: #000000;
+    background-color: white;
+    font-weight: bold;
+    width: 10rem;
+    height: 10rem;
+    padding-top: 2rem;
+}
+
+.btn-awic a {
+    color: #000000;
+}
+
+.btn-awic a:hover {
+    text-decoration: none;
+    color: var(--aqua);
+}
+
+.text-white {
+    color: #FFFFFF;
+}

@@ -1,0 +1,10 @@
+<div class="align-items-center text-center pt-5">
+	<h1 class="h1 text-white">Bienvenido a la Aplicación Web de Integración Continua para Pruebas TSP</h1>
+	<br><br><br>
+	<% if current_user.nil? %>
+		<%= link_to new_user_session_path, class: 'login-button btn btn-light' do %>Iniciar Sesión<% end %>
+	<% else %>
+		<%= link_to dashboard_index_path, class: 'login-button btn btn-light' do %>Ir al Dashboard<% end %>
+		<%= link_to destroy_user_session_path, class: 'btn btn-light', method: :delete do %>Cerrar Sesión<% end %>
+	<% end %>
+</div>
