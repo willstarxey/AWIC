@@ -74,3 +74,7 @@
 .text-white {
     color: #FFFFFF;
 }
+
+.round-corners{
+    border-radius: 15px !important;
+}

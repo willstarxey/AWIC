@@ -51,3 +51,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #Gemas para AWIC
 gem 'devise'
+gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
+gem 'cancancan'

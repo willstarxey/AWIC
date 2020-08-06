@@ -1,2 +1,54 @@
-<h1>Users#create</h1>
-<p>Find me in app/views/users/create.html.erb</p>
+<div class="container">
+	<div class="row justify-content-md-center align-items-center">
+        <div class="col-md-10 align-item-center">
+		<div class="card text-center">
+			<div class="card-header">
+				<h3>Agregar Usuario</h3>
+			</div>
+			<div class="card-body bg-aqua justify-content-center">
+                <form method="POST" action="store" accept-charset="UTF-8" role="form" id="crearusuario" name="crearusuario" enctype="multipart/form-data">
+                <!-- Protección CSRF -->
+                <%= token_tag nil %>
+                    <div class="row">
+                        <div class="col-md-4 input-group form-group">
+					        <input type="text" class="form-control" placeholder="Nombre (s)" id="nombre" name="nombre" required>
+					    </div>
+					    <div class="col-md-4 input-group form-group">
+					        <input type="text" class="form-control" placeholder="Apellido Paterno" id="app" name="app" required>
+					    </div>
+                        <div class="col-md-4 input-group form-group">
+					        <input type="text" class="form-control" placeholder="Apellido Materno" id="apm" name="apm" required>
+					    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 input-group form-group">
+					        <input type="number" class="form-control" placeholder="Edad" id="edad" name="edad" required>
+					    </div>
+					    <div class="col-md-4 input-group form-group">
+					        <select type="select" class="form-control" name="sexo" id="sexo">
+                                <option value="null" selected>Seleccione un Género</option>
+                                <option value="H">Hombre</option>
+                                <option value="M">Mujer</option>
+                            </select>
+					    </div>
+                        <div class="col-md-4 input-group form-group">
+					        <input type="text" class="form-control" placeholder="Puesto" id="puesto" name="puesto" required>
+					    </div>
+                    </div>
+					<div class="row">
+                        <div class="col-md-6 input-group form-group">
+						    <input type="text" class="form-control" placeholder="Correo Electrónico" id="email" name="email" required>
+					    </div>
+                    </div>
+					<div class="form-group bg-white d-inline-flex mt-3">
+                        <button type="submit" class="btn">Guardar</button>
+					</div>
+                    <div class="form-group d-inline-flex mt-3">
+                        <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
+					</div>
+                </form>
+			</div>
+		</div>
+	</div>
+    </div>
+</div>

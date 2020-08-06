@@ -1,2 +1,77 @@
-<h1>Users#update</h1>
-<p>Find me in app/views/users/update.html.erb</p>
+<div class="container">
+	<div class="row justify-content-md-center align-items-center">
+        <div class="col-md-10 align-item-center">
+		<div class="card text-center">
+			<div class="card-header">
+				<h3>Datos del Usuario</h3>
+			</div>
+			<div class="card-body bg-aqua justify-content-center">
+            <% @user.each do |user| %>
+                <form method="POST" action="edit/<%= user.id %>" accept-charset="UTF-8" role="form" id="actualizarusuario" name="actualizarusuario" enctype="multipart/form-data"> 
+                    <!-- Protección CSRF -->
+                    <%= token_tag nil %>
+                    <div class="row">
+                        <div class="col-md-4 input-group form-group">
+					        <input type="text" class="form-control" placeholder="Nombre (s)" id="nombre" name="nombre" value="<%= user.nombre %>" required>
+					    </div>
+					    <div class="col-md-4 input-group form-group">
+					        <input type="text" class="form-control" placeholder="Apellido Paterno" id="app" name="app" value="<%= user.app %>" required>
+					    </div>
+                        <div class="col-md-4 input-group form-group">
+					        <input type="text" class="form-control" placeholder="Apellido Materno" id="apm" name="apm" value="<%= user.apm %>" required>
+					    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 input-group form-group">
+					        <input type="number" class="form-control" placeholder="Edad" id="edad" name="edad" required value="<%= user.edad %>">
+					    </div>
+					    <div class="col-md-4 input-group form-group">
+					        <select type="select" class="form-control" name="sexo" id="sexo">
+                                <option value="null">Seleccione una Opción</option>
+                                <% if user.sexo = 'H' %>
+                                <option value="H" selected>Hombre</option>
+                                <option value="M">Mujer</option>
+                                <% else %>
+                                <option value="H">Hombre</option>
+                                <option value="M" selected>Mujer</option>
+                                <% end %>
+                            </select>
+					    </div>
+                        <div class="col-md-4 input-group form-group">
+					        <input type="text" class="form-control" placeholder="Puesto" id="puesto" name="puesto" value="<%= user.puesto %>" required>
+					    </div>
+                    </div>
+					<div class="row">
+                        <div class="col-md-6 input-group form-group">
+						    <input type="text" class="form-control" placeholder="Correo Electrónico" id="email" name="email" value="<%= user.email %>" required>
+					    </div>
+                    </div>
+                    <div class="form-group bg-white d-inline-flex mt-3">
+                        <button type="submit" class="btn">Guardar</button>
+				    </div>
+                    <div class="form-group d-inline-flex mt-3">
+                        <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
+				    </div>
+                </form>
+                <div class="row justify-content-center mt-1">
+                    <form method="POST" action="/users/restore/<%= user.id %>" accept-charset="UTF-8" class="form-horizontal" role="form" onsubmit="return ConfirmRestore()">
+                    <!-- Protección CSRF -->
+                    <%= token_tag nil %>
+                    <div class="form-group d-inline-flex">
+                        <button type="submit" class="btn btn-info mr-1">Restaurar Contraseña</button>
+				    </div>
+                    </form>
+                    <form method="POST" action="/users/delete/<%= user.id %>" accept-charset="UTF-8" class="form-horizontal" role="form" onsubmit="return ConfirmDelete()">
+                    <!-- Protección CSRF -->
+                    <%= token_tag nil %>
+                    <div class="form-group d-inline-flex">
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+				    </div>
+                    </form>
+                </div>
+            <% end %>
+            </div>
+		</div>
+	</div>
+    </div>
+</div>
