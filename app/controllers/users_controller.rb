@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
+
+  before_action :authenticate_user!
+  load_and_authorize_resource
+
   @root_url = "/users/index"
   layout 'application_dashboard'
 
-  #load_and_authorize_resource
-
-  add_flash_types :notice
+  add_flash_types :success, :danger, :info, :warning
 
   def index
   end
@@ -15,15 +17,17 @@ class UsersController < ApplicationController
   
   def store
     #Crea usuario con parámetros de la vista
-    @password = ""
     @user = User.new(parametros)
     @user.password = "AWIC0000"
     #Redireccionamiento a la visa de busqueda
     if @user.save
-      flash[:notice] = "Usuario Creado Correctamente"
+      flash[:success] = "Usuario Creado Correctamente"
+      redirect_to users_index_path
+    elsif User.find_by(email: @user.email)
+      flash[:warning] = "Ya existe un usuario con el correo: "+@user.email
       redirect_to users_index_path
   	else
-  		flash[:notice] = "El usuario no se pudo crear"
+  		flash[:danger] = "El usuario no se pudo crear"
       redirect_to users_index_path
     end
   end
@@ -39,7 +43,7 @@ class UsersController < ApplicationController
       @user.update(parametros)
       #Redireccionamiento a la visa de busqueda
       @ini = "/users/index"
-      flash[:notice] = "Usuario Actualizado Correctamente"
+      flash[:success] = "Usuario Actualizado Correctamente"
       redirect_to @ini
     end
   
@@ -49,7 +53,7 @@ class UsersController < ApplicationController
         @user = User.where(id: @user)
       rescue ActiveRecord::RecordNotFound => e
         @user = nil
-        flash[:notice] = "Usuario No Registrado"
+        flash[:danger] = "Usuario No Registrado"
         redirect_to users_search_path
       end
     end
@@ -59,7 +63,7 @@ class UsersController < ApplicationController
       User.where(id: @user).destroy_all
       #Redireccionamiento a la visa de busqueda
       @ini = "/users/index"
-      flash[:notice] = "Usuario Eliminado Correctamente"
+      flash[:success] = "Usuario Eliminado Correctamente"
       redirect_to @ini
     end
 
@@ -68,13 +72,12 @@ class UsersController < ApplicationController
       @user.password = "AWIC0000"
       @user.update(parametros)
       @ini = "/users/index"
-      flash[:notice] = "Usuario Restaurado Correctamente"
+      flash[:success] = "Usuario Restaurado Correctamente"
       redirect_to @ini
     end
 
   private
   def parametros
-    params.permit(:nombre, :app, :apm, :edad, :sexo, :puesto, :email)
+    params.permit(:nombre, :app, :apm, :edad, :sexo, :puesto, :email, :role_id)
   end
-
 end

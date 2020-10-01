@@ -25,8 +25,8 @@
 					        <input type="number" class="form-control" placeholder="Edad" id="edad" name="edad" required>
 					    </div>
 					    <div class="col-md-4 input-group form-group">
-					        <select type="select" class="form-control" name="sexo" id="sexo">
-                                <option value="null" selected>Seleccione un Género</option>
+					        <select type="select" class="form-control" name="sexo" id="sexo" required>
+                                <option value="" selected>Seleccione un Género</option>
                                 <option value="H">Hombre</option>
                                 <option value="M">Mujer</option>
                             </select>
@@ -39,9 +39,16 @@
                         <div class="col-md-6 input-group form-group">
 						    <input type="text" class="form-control" placeholder="Correo Electrónico" id="email" name="email" required>
 					    </div>
+						<div class="col-md-6 input-group form-group">
+					        <select type="select" class="form-control" name="role_id" id="role_id" required>
+                                <option value="" selected>Seleccione un Rol</option>
+                                <option value="1">Administrador</option>
+                                <option value="3">Usuario</option>
+                            </select>
+					    </div>
                     </div>
-					<div class="form-group bg-white d-inline-flex mt-3">
-                        <button type="submit" class="btn">Guardar</button>
+					<div class="form-group d-inline-flex mt-3">
+                        <button type="submit" class="btn btn-light">Guardar</button>
 					</div>
                     <div class="form-group d-inline-flex mt-3">
                         <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>

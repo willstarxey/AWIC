@@ -10,27 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_02_181745) do
+ActiveRecord::Schema.define(version: 2020_09_30_210231) do
+
+  create_table "proyectos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "nombre", null: false
+    t.string "descripcion", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_proyectos_on_user_id"
+  end
+
+  create_table "roles", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "nombre"
+    t.string "descripcion"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "nombre"
-    t.string "app"
-    t.string "apm"
-    t.integer "edad"
-    t.string "sexo"
-    t.string "puesto"
+    t.string "nombre", null: false
+    t.string "app", null: false
+    t.string "apm", null: false
+    t.integer "edad", null: false
+    t.string "sexo", null: false
+    t.string "puesto", null: false
+    t.bigint "role_id", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.boolean "superadmin_role", default: false
-    t.boolean "lider_role", default: false
-    t.boolean "user_role", default: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
 end

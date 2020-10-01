@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+ /*@import "bootstrap";*/
 
  :root{
     --aqua: #00a6af;
@@ -77,4 +78,21 @@
 
 .round-corners{
     border-radius: 15px !important;
+}
+
+.modal-header {
+    background-color: var(--aqua) !important;
+}
+
+.modal-footer {
+    background-color: var(--aqua) !important;
+    
+}
+
+.modal-header {
+    color : white !important;
+}
+
+.btn-default {
+    background-color: white !important;
 }

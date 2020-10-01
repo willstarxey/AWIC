@@ -27,8 +27,8 @@
 					    </div>
 					    <div class="col-md-4 input-group form-group">
 					        <select type="select" class="form-control" name="sexo" id="sexo">
-                                <option value="null">Seleccione una Opción</option>
-                                <% if user.sexo = 'H' %>
+                                <option value="">Seleccione una Opción</option>
+                                <% if user.sexo == 'H' %>
                                 <option value="H" selected>Hombre</option>
                                 <option value="M">Mujer</option>
                                 <% else %>
@@ -45,27 +45,39 @@
                         <div class="col-md-6 input-group form-group">
 						    <input type="text" class="form-control" placeholder="Correo Electrónico" id="email" name="email" value="<%= user.email %>" required>
 					    </div>
+                        <div class="col-md-6 input-group form-group">
+					        <select type="select" class="form-control" name="role_id" id="role_id" required>
+                                <option value="">Seleccione un Rol</option>
+                                <% if user.admin? %>
+                                    <option value="1" selected>Administrador</option>
+                                    <option value="3">Usuario</option>
+                                <% else %>
+                                    <option value="1">Administrador</option>
+                                    <option value="3" selected>Usuario</option>
+                                <% end %>
+                            </select>
+					    </div>
                     </div>
-                    <div class="form-group bg-white d-inline-flex mt-3">
-                        <button type="submit" class="btn">Guardar</button>
+                    <div class="form-group d-inline-flex mt-3">
+                        <button type="submit" class="btn btn-light">Guardar</button>
 				    </div>
                     <div class="form-group d-inline-flex mt-3">
                         <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
 				    </div>
                 </form>
                 <div class="row justify-content-center mt-1">
-                    <form method="POST" action="/users/restore/<%= user.id %>" accept-charset="UTF-8" class="form-horizontal" role="form" onsubmit="return ConfirmRestore()">
+                    <form method="POST" action="/users/restore/<%= user.id %>" accept-charset="UTF-8" class="form-horizontal" role="form">
                     <!-- Protección CSRF -->
                     <%= token_tag nil %>
                     <div class="form-group d-inline-flex">
-                        <button type="submit" class="btn btn-info mr-1">Restaurar Contraseña</button>
+                        <button type="submit" class="btn btn-secondary mr-1" data-confirm="¿Desea restaurar al usuario <%=user.nombre%> con el correo <%=user.email%>?" data-title="Restaurar Contraseña" data-commit="Restaurar" data-cancel="Cancelar">Restaurar Contraseña</button>
 				    </div>
                     </form>
-                    <form method="POST" action="/users/delete/<%= user.id %>" accept-charset="UTF-8" class="form-horizontal" role="form" onsubmit="return ConfirmDelete()">
+                    <form method="POST" action="/users/delete/<%= user.id %>" accept-charset="UTF-8" class="form-horizontal" role="form">
                     <!-- Protección CSRF -->
                     <%= token_tag nil %>
                     <div class="form-group d-inline-flex">
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        <button type="submit" class="btn btn-danger" data-confirm="¿Desea eliminar al usuario <%=user.nombre%> con el correo <%=user.email%>?" data-title="Eliminar Usuario" data-commit="Eliminar" data-cancel="Cancelar">Eliminar</button>
 				    </div>
                     </form>
                 </div>
