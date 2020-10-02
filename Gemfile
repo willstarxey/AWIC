@@ -51,10 +51,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 #Gemas para AWIC
 gem 'devise'
-gem 'rails_admin', git: 'https://github.com/sferik/rails_admin.git'
 gem 'cancancan'
 
 #Gemas de diseño
 gem 'data-confirm-modal'
 gem 'jquery-rails'
-gem  'bootstrap' ,  '~> 4.0'
+gem 'bootstrap' ,  '~> 4.0'
