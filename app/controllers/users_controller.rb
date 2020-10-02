@@ -60,20 +60,27 @@ class UsersController < ApplicationController
   
     def delete
       @user = User.find(params[:id])
-      User.where(id: @user).destroy_all
-      #Redireccionamiento a la visa de busqueda
-      @ini = "/users/index"
-      flash[:success] = "Usuario Eliminado Correctamente"
-      redirect_to @ini
+      if Proyecto.find_by(user_id: @user.id)
+        flash[:danger] = "No se pudo eliminar el usuario porque lidera un proyecto, favor de removerlo de su cargo primero."
+        redirect_to users_index_path
+      else
+        User.where(id: @user).destroy_all
+        #Redireccionamiento a la visa de busqueda
+        flash[:success] = "Usuario Eliminado Correctamente"
+        redirect_to users_index_path
+      end
     end
 
     def restore
       @user = User.find(params[:id])
       @user.password = "AWIC0000"
-      @user.update(parametros)
-      @ini = "/users/index"
-      flash[:success] = "Usuario Restaurado Correctamente"
-      redirect_to @ini
+      if @user.update(parametros)
+        flash[:success] = "Usuario Restaurado Correctamente"
+        redirect_to users_index_path
+      else
+        flash[:success] = "El usuario no se pudo restaurar correctamente."
+        redirect_to users_index_path
+      end
     end
 
   private

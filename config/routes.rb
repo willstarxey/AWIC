@@ -20,9 +20,12 @@ Rails.application.routes.draw do
     post 'users/restore/:id', to: 'users#restore'
     #PROYECTOS ROUTES
     get 'proyectos/index'
-    get 'proyectos/create'
+    get 'proyectos/create' => 'proyectos#create'
     get 'proyectos/search'
-    get 'proyectos/update'
+    get 'proyectos/update' => 'proyectos#update'
+    post 'proyectos/store' => 'proyectos#store'
+    post 'proyectos/edit/:id', to: 'proyectos#edit'
+    post 'proyectos/delete/:id', to: 'proyectos#delete'
     #DASHBOARD ROUTES
     get 'dashboard/index'
     get 'dashboard/change'

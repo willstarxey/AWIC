@@ -24,6 +24,9 @@
 	        <%= link_to "Usuarios", users_index_path, class: 'btn btn-lg btn-block btn-aqua' %>
           <%= link_to "Proyectos", proyectos_index_path, class: 'btn btn-lg btn-block btn-aqua' %>
         <% end %>
+        <% if current_user.usuario? %>
+          <%= link_to "Proyectos", proyectos_index_path, class: 'btn btn-lg btn-block btn-aqua' %>
+        <% end %>
       </div>
       <div class="col-md-10 p-5 bg-image-main">
           <div class="my-5">
