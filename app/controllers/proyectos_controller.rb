@@ -21,6 +21,11 @@ class ProyectosController < ApplicationController
     @proyecto = Proyecto.new(parametros)
     #Redireccionamiento a la visa de busqueda
     if @proyecto.save
+      #Actualización del Rol del Usuario a Lider
+      @user = User.find(params[:user_id])
+      @user = User.where(id: @user)
+      @user.update(role_id: Role.find("2").id)
+      #Impresión del proceso satisfactorio
       flash[:success] = "Proyecto Creado Correctamente"
       redirect_to proyectos_index_path
     elsif Proyecto.find_by(nombre: @proyecto.nombre)
@@ -40,6 +45,11 @@ class ProyectosController < ApplicationController
     @proyecto = Proyecto.find(params[:id])
     @proyecto = Proyecto.where(id: @proyecto)
     @proyecto.update(parametros)
+    #Actualización del Rol del Usuario a Lider
+    @user = User.find(params[:user_id])
+    @user = User.where(id: @user)
+    @user.update(role_id: Role.find("2").id)
+    #Impresión del proceso satisfactorio
     #Redireccionamiento a la visa de busqueda
     flash[:success] = "Proyecto Actualizado Correctamente"
     redirect_to proyectos_index_path
@@ -60,6 +70,11 @@ class ProyectosController < ApplicationController
   def delete
     @proyecto = Proyecto.find(params[:id])
     Proyecto.where(id: @proyecto).destroy_all
+    #Actualización del Rol del Usuario a Lider
+    @user = User.find(params[:user_id])
+    @user = User.where(id: @user)
+    @user.update(role_id: Role.find("3").id)
+    #Impresión del proceso satisfactorio
     #Redireccionamiento a la visa de busqueda
     flash[:success] = "Proyecto Eliminado Correctamente"
     redirect_to proyectos_index_path
@@ -67,12 +82,12 @@ class ProyectosController < ApplicationController
 
   private
   def parametros
-    params.permit(:nombre, :user_id)
+    params.permit(:nombre)
   end
 
   def getUsers
     @user = nil
-    return @users = User.all
+    return @users = User.where(role_id: "3")
   end
 
 end

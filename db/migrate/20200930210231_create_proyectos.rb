@@ -3,9 +3,8 @@ class CreateProyectos < ActiveRecord::Migration[6.0]
     create_table :proyectos do |t|
       t.string :nombre, null: false
       t.string :descripcion, null: true, default: ""
+      t.integer :n_ciclos, null: true, default: 0
       t.timestamps
-      #Foreign Key from User for Project
-      t.belongs_to :user, null: false, foreign_key: true
     end
   end
 end

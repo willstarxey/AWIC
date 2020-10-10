@@ -29,7 +29,7 @@
             <button class="btn btn-lg btn-block btn-aqua dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Proyectos
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
               <% @current_user.proyectos.each do |proyecto| %>
                 <a class="dropdown-item" href="/proyectos/update?id=<%=proyecto.id%>"><%=proyecto.nombre%></a>
               <% end %>

@@ -4,6 +4,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    #Definición auxiliar de USER
+    user ||= User.new #Usuario no logeado
     # Define abilities for the passed in user here. For example:
     if user.admin?
       can :manage, :all
@@ -13,8 +15,8 @@ class Ability
       end
     elsif user.usuario?
       can :manage, User, id: user.id
-      can :read, Proyecto
-      can :update, Proyecto
+      can :read, Proyecto, user_id: user.id
+      can :update, Proyecto, user_id: user.id
     end
     
     #

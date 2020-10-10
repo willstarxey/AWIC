@@ -33,9 +33,8 @@ class HomeController < ApplicationController
     @user.role_id = @admin.id
     #Confirmación del match de las contraseñas
     if params[:password] != params[:confirmPass]
-      @ini = "/home/create"
       flash[:warning] = "Las Contraseñas No Coinciden"
-      redirect_to @ini
+      redirect_to home_create_path
     else
       if @user.save
         flash[:success] = "Administrador Creado Correctamente"

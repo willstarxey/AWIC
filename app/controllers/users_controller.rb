@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :authenticate_user!
-  load_and_authorize_resource
+  #load_and_authorize_resource
 
   @root_url = "/users/index"
   layout 'application_dashboard'
@@ -42,9 +42,8 @@ class UsersController < ApplicationController
       @user = User.where(id: @user)
       @user.update(parametros)
       #Redireccionamiento a la visa de busqueda
-      @ini = "/users/index"
       flash[:success] = "Usuario Actualizado Correctamente"
-      redirect_to @ini
+      redirect_to users_index_path
     end
   
     def update
@@ -60,7 +59,7 @@ class UsersController < ApplicationController
   
     def delete
       @user = User.find(params[:id])
-      if Proyecto.find_by(user_id: @user.id)
+      if @user.role_id == "2"
         flash[:danger] = "No se pudo eliminar el usuario porque lidera un proyecto, favor de removerlo de su cargo primero."
         redirect_to users_index_path
       else
