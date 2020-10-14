@@ -7,7 +7,8 @@ class User < ApplicationRecord
   #attr_accessible :nombre, :app, :apm, :edad, :sexo, :puesto, :email
   #Dependencia del usuario a un rol
   belongs_to :role, optional: true
-  has_and_belongs_to_many :proyectos
+  has_many :colaboradors
+  has_many :proyectos, through: :colaboradors
 
   def admin?
     role.nombre == 'Administrador'

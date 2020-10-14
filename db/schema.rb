@@ -10,22 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_07_191434) do
+ActiveRecord::Schema.define(version: 2020_10_13_205103) do
+
+  create_table "colaboradors", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "proyecto_id"
+    t.datetime "added_at", null: false
+    t.boolean "lider", null: false
+    t.index ["proyecto_id"], name: "index_colaboradors_on_proyecto_id"
+    t.index ["user_id"], name: "index_colaboradors_on_user_id"
+  end
 
   create_table "proyectos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "nombre", null: false
     t.string "descripcion", default: ""
+    t.integer "n_ciclos", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "proyectos_users", id: false, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "proyecto_id", null: false
-    t.timestamp "added_at", null: false
-    t.boolean "lider", default: false, null: false
-    t.index ["proyecto_id", "user_id"], name: "index_proyectos_users_on_proyecto_id_and_user_id"
-    t.index ["user_id", "proyecto_id"], name: "index_proyectos_users_on_user_id_and_proyecto_id"
   end
 
   create_table "roles", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

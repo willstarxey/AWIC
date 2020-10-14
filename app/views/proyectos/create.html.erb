@@ -18,7 +18,7 @@
 					    <div class="col-md-12 input-group form-group">
 					        <select type="select" class="form-control" name="user_id" id="user_id" required>
                                 <option value="" selected>Seleccione el Líder del Proyecto</option>
-                                <% @users.each do |user| %>
+                                <% User.where(role_id: "3").each do |user| %>
                                     <option value="<%=user.id%>"><%=user.nombre%> <%=user.app%> <%=user.apm%> - <%=user.puesto%></option>
                                 <% end %>
                             </select>

@@ -40,10 +40,14 @@ class UsersController < ApplicationController
     def edit
       @user = User.find(params[:id])
       @user = User.where(id: @user)
-      @user.update(parametros)
-      #Redireccionamiento a la visa de busqueda
-      flash[:success] = "Usuario Actualizado Correctamente"
-      redirect_to users_index_path
+      if @user.update(parametros)
+        #Redireccionamiento a la visa de busqueda
+        flash[:success] = "Usuario Actualizado Correctamente"
+        redirect_to users_index_path
+      else
+        flash[:danger] = "El usuario no se pudo actualizar"
+        redirect_to users_index_path
+      end
     end
   
     def update

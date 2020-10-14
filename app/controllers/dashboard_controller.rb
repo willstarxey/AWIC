@@ -24,16 +24,14 @@ class DashboardController < ApplicationController
 
   def changePass
     if params[:password] != params[:confirmPass]
-      @ini = "/dashboard/change"
       flash[:warning] = "Las Contraseñas No Coinciden"
-      redirect_to @ini
+      redirect_to dashboard_change_path
     else
       @user = User.find(params[:id])
       @user.password = params[:password]
       @user.update(params.permit(:password))
-      @ini = "/dashboard/index"
       flash[:info] = "Se Ha Establecido La Nueva Contraseña"
-      redirect_to @ini
+      redirect_to dashboard_index_path
     end
   end
 
