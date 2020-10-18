@@ -34,5 +34,15 @@ Rails.application.routes.draw do
     get "/404", to: "errors#not_found"
     get "/422", to: "errors#unacceptable"
     get "/500", to: "errors#internal_error"
+
+    #LANZAMIENTO::METAS
+    namespace :lanzamiento do
+      get 'metas/index'
+      get 'metas/create' => 'metas#create'
+      get 'metas/update' => 'metas#update'
+      post 'metas/store' => 'metas#store'
+      post 'metas/edit/:id', to: 'metas#edit'
+      post 'metas/delete/:id', to: 'metas#delete'
+    end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

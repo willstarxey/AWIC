@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_13_205103) do
+ActiveRecord::Schema.define(version: 2020_10_15_185701) do
 
   create_table "colaboradors", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(version: 2020_10_13_205103) do
     t.boolean "lider", null: false
     t.index ["proyecto_id"], name: "index_colaboradors_on_proyecto_id"
     t.index ["user_id"], name: "index_colaboradors_on_user_id"
+  end
+
+  create_table "lanzamiento_metas", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "descripcion", default: "", null: false
+    t.string "plazo", default: "", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "colaborador_id"
+    t.index ["colaborador_id"], name: "index_lanzamiento_metas_on_colaborador_id"
   end
 
   create_table "proyectos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

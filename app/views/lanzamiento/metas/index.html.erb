@@ -1,0 +1,25 @@
+<div class="card bg-aqua">
+    <div class="card-header text-white">
+        <h3>Lanzamiento  : :  Metas</h3>
+    </div>
+    <table class="table table-hover table-sm table-dark card-body">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Plazo</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @colaboradors.each do |colab|%>
+            <% colab.lanzamiento_metas.each do |meta|%>
+                <tr>
+                <th scope="row"><%=meta.id%></th>
+                <td><%=meta.descripcion%></td>
+                <td><%=meta.plazo%></td>
+                </tr>
+            <% end %>
+        <% end %>
+        </tbody>
+    </table>
+</div>

@@ -45,10 +45,6 @@
     color: #ffffff !important;
 }
 
-.text-white{
-    color:#ffffff;
-}
-
 .btn-aqua:hover {
     border-color: none;
     background-color: var(--aqua-hover);
