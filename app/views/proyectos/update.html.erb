@@ -7,6 +7,8 @@
 			</div>
 			<div class="card-body bg-aqua justify-content-center">
             <% @proyecto.each do |proyecto| %>
+            <% if current_user.admin? %>
+            <!-- VISTA DEL ADMINISTRADOR DE LA PLATAFORMA -->
                 <form method="POST" action="edit/<%= proyecto.id %>" accept-charset="UTF-8" role="form" id="actualizarproyecto" name="actualizarproyecto" enctype="multipart/form-data"> 
                     <!-- Protección CSRF -->
                     <%= token_tag nil %>
@@ -45,6 +47,43 @@
 				    </div>
                     </form>
                 </div>
+                <% elsif current_user.lider? %>
+                <!-- VISTA DEL LIDER DEL PROYECTO -->
+                <form method="POST" action="edit_lider/<%= proyecto.id %>" accept-charset="UTF-8" role="form" id="actualizarproyecto" name="actualizarproyecto" enctype="multipart/form-data"> 
+                    <!-- Protección CSRF -->
+                    <%= token_tag nil %>
+                    <div class="row">
+                        <div class="col-md-2">
+					        <label>Nombre del Proyecto</label>
+					    </div>
+                        <div class="col-md-10 input-group form-group">
+					        <input type="text" class="form-control" placeholder="Nombre del Proyecto" id="nombre" name="nombre" value="<%= proyecto.nombre %>" readonly>
+					    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+					        <label>Descripción</label>
+					    </div>
+					    <div class="col-md-10 input-group form-group">
+                            <textarea class="form-control" placeholder="Descripción del Proyecto" id="descripcion" name="descripcion" required><%=proyecto.descripcion%></textarea>
+					    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+					        <label>Número de ciclos</label>
+					    </div>
+					    <div class="col-md-10 input-group form-group">
+					        <input type="text" class="form-control" placeholder="Número de Ciclos" id="n_ciclos" name="n_ciclos" value="<%=proyecto.n_ciclos%>" only="number" required>
+					    </div>
+                    </div>
+                    <div class="form-group d-inline-flex mt-3">
+                        <button type="submit" class="btn btn-light">Guardar</button>
+				    </div>
+                    <div class="form-group d-inline-flex mt-3">
+                        <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
+				    </div>
+                </form>
+                <% end %>
             <% end %>
             </div>
 		</div>

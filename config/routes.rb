@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     get 'proyectos/update' => 'proyectos#update'
     post 'proyectos/store' => 'proyectos#store'
     post 'proyectos/edit/:id', to: 'proyectos#edit'
+    post 'proyectos/edit_lider/:id', to: 'proyectos#edit_lider'
     post 'proyectos/delete/:id', to: 'proyectos#delete'
     #DASHBOARD ROUTES
     get 'dashboard/index'

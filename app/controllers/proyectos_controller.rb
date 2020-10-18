@@ -15,6 +15,11 @@ class ProyectosController < ApplicationController
     @proyecto = Proyecto.new
   end
 
+  def show
+    @proyecto = Proyecto.find(params[:proyecto_id])
+    @proyecto = Proyecto.where(id: @proyecto)
+  end
+
   def store
     #Crea usuario con parámetros de la vista
     @proyecto = Proyecto.new(parametros)
@@ -58,7 +63,20 @@ class ProyectosController < ApplicationController
     end
   end
 
+  def edit_lider
+    @proyecto = Proyecto.find(params[:id])
+    @proyecto = Proyecto.where(id: @proyecto)
+    if @proyecto.update(parametros_user)
+      flash[:success] = "Proyecto Actualizado Correctamente"
+      redirect_to dashboard_index_path(:proyecto_id => params[:id])
+    end
+  end
+
   def update
+    if params[:proyecto_id]
+      @proyecto = Proyecto.find(params[:proyecto_id])
+      @proyecto = Proyecto.where(id: @proyecto)
+    else
     begin
       @proyecto = Proyecto.find(params[:id])
       @proyecto = Proyecto.where(id: @proyecto)
@@ -71,6 +89,7 @@ class ProyectosController < ApplicationController
       flash[:danger] = "Proyecto No Registrado"
       redirect_to proyectos_search_path
     end
+  end
   end
 
   def delete
@@ -91,6 +110,10 @@ class ProyectosController < ApplicationController
   private
   def parametros
     params.permit(:nombre)
+  end
+
+  def parametros_user
+    params.permit(:nombre, :descripcion, :n_ciclos)
   end
 
   #Actualización de roles a usuarios
