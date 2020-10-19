@@ -92,3 +92,14 @@
 .btn-default {
     background-color: white !important;
 }
+
+.btn-delete {
+    background-image: url('delete.png');
+    background-color: transparent;
+    background-size: contain;
+    border: none;
+    width: 21px;
+    height: 25px;
+    cursor: pointer;
+    color: transparent;
+}

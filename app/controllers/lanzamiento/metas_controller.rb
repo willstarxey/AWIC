@@ -16,13 +16,59 @@ class Lanzamiento::MetasController < ApplicationController
   end
 
   def create
+    @meta = Lanzamiento::Meta.new
+  end
+
+  def store
+    #Definición e inicialización de nueva meta
+    @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
+    @meta = Lanzamiento::Meta.new(parametros)
+    @meta.colaborador_id = @colaborador.id
+    if(@meta.save)
+      #Impresión del proceso satisfactorio
+      flash[:success] = "Meta Creada Correctamente"
+      redirect_to lanzamiento_metas_index_path(:proyecto_id => @meta.colaborador.proyecto_id)
+    else
+      #Impresión del proceso satisfactorio
+      flash[:danger] = "No se pudo crear la meta"
+      redirect_to lanzamiento_metas_index_path(:proyecto_id => @meta.colaborador.proyecto_id)
+    end
+  end
+
+  def edit
+    @meta = Lanzamiento::Meta.find(params[:id])
+    @meta = Lanzamiento::Meta.where(id: @meta).first
+    if @meta.update(parametros)
+      #Impresión del proceso satisfactorio
+      flash[:success] = "Meta Actualizada Correctamente"
+      redirect_to lanzamiento_metas_index_path(:proyecto_id => @meta.colaborador.proyecto_id)
+    else
+      #Impresión del proceso satisfactorio
+      flash[:danger] = "No se pudo actualizar la meta"
+      redirect_to lanzamiento_metas_index_path(:proyecto_id => @meta.colaborador.proyecto_id)
+    end
   end
 
   def update
-    @meta = Lanzamiento::Meta.find(params[:id])
-    @meta = Lanzamiento::Meta.where(id: @meta)
+    begin
+      @meta = Lanzamiento::Meta.find(params[:id])
+      @meta = Lanzamiento::Meta.where(id: @meta)
+    rescue ActiveRecord::RecordNotFound => e
+      @meta = nil
+      flash[:danger] = "Meta No Registrado"
+      redirect_to lanzamiento_metas_index_path(:proyecto_id => @meta.colaborador.proyecto_id)
+    end
   end
 
   def delete
+    @meta = Lanzamiento::Meta.find(params[:id])
+    Lanzamiento::Meta.where(id: @meta).destroy_all
+    flash[:success] = "Meta Eliminada"
+    redirect_to lanzamiento_metas_index_path(:proyecto_id => @meta.colaborador.proyecto_id)
+  end
+
+  private
+  def parametros
+    params.permit(:descripcion, :plazo)
   end
 end
