@@ -13,9 +13,9 @@ class Ability
       can :update, Proyecto do |proyecto|
         proyecto.try(:user) == proyecto
       end
-      can :manage, Lanzamiento::Meta do |meta|
-        meta.try(colaborador: { user_id: { :id => user.id } }) == meta
-      end
+      can :manage, Lanzamiento::Meta #do |meta|
+        #meta.try(colaborador: { user_id: { :id => user.id } }) == meta
+      #end
     elsif user.usuario?
       can :read, Proyecto, user_id: user.id
       #can :update, Proyecto, user_id: user.id

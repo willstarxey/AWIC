@@ -19,6 +19,8 @@ class Lanzamiento::MetasController < ApplicationController
   end
 
   def update
+    @meta = Lanzamiento::Meta.find(params[:id])
+    @meta = Lanzamiento::Meta.where(id: @meta)
   end
 
   def delete

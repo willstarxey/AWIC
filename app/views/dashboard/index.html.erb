@@ -3,18 +3,20 @@
         <h1 class="h1 text-white">BIENVENIDO AL SISTEMA <%= current_user.nombre %></h1>
     </div>
     <% if !params[:proyecto_id].nil? %>
+        <% proyecto = Proyecto.find(params[:proyecto_id]) %>
         <br><br>
         <div class="row justify-content-md-center align-items-center">
-            <h1 class="h1 text-white"><%= Proyecto.find(params[:proyecto_id]).nombre %></h1>
+            <h1 class="h1 text-white"><%= proyecto.nombre %></h1>
         </div>
+        <br>
         <div class="row justify-content-md-center align-items-center">
             <br>
-            <h4 class="h4 text-white"><%= Proyecto.find(params[:proyecto_id]).descripcion %></h4>
+            <h4 class="h4 text-white"><%= proyecto.descripcion %></h4>
         </div>
-        <br><br>
+        <br>
         <div class="row justify-content-md-center align-items-center">
             <div class="form-group d-inline-flex mt-3 px-1">
-                <%= link_to 'Detalles del Proyecto', proyectos_update_path(:proyecto_id => params[:proyecto_id]) , class: 'btn btn-light'%>
+                <%= link_to 'Detalles del Proyecto', proyectos_update_path(:proyecto_id => proyecto.id) , class: 'btn btn-light'%>
             </div>
             <div class="form-group d-inline-flex mt-3 px-1">
                 <%= link_to 'Dashboard', dashboard_index_path, class: "btn btn-aqua" %>
