@@ -1,0 +1,2 @@
+module Requerimientos::RequerimientosHelper
+end

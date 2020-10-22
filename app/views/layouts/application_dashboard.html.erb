@@ -44,7 +44,7 @@
                 Lanzamiento
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <%= link_to "Personal", lanzamiento_personal_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
+                  <%= link_to "Personal", lanzamiento_personal_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
                   <%= link_to "Metas", lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
               </div>
             </div>
@@ -54,9 +54,8 @@
                 Estrategia
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a href="#" class="dropdown-item">Diseños</a>
-                <a href="#" class="dropdown-item">Criterios</a>
-                <a href="#" class="dropdown-item">Estimaciones</a>
+                <%= link_to "Diseños", estrategia_disenos_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
+                <%= link_to "Criterios", estrategia_criterios_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
               </div>
             </div>
             <!--PLANEACIÓN-->
@@ -65,7 +64,7 @@
                 Planeación
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a href="#" class="dropdown-item">Panes de calidad</a>
+                <%= link_to "Planes de Calidad", planeacion_planes_calidad_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
               </div>
             </div>
             <!--REQUERIMIENTOS-->
@@ -74,8 +73,8 @@
                 Requerimientos
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a href="#" class="dropdown-item">Requerimientos</a>
-                <a href="#" class="dropdown-item">Tareas</a>
+                <%= link_to "Requerimientos", requerimientos_requerimientos_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
+                <!--<a href="#" class="dropdown-item">Tareas</a>-->
               </div>
             </div>
             <!--DISEÑO-->

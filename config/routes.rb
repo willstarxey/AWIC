@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     get "/404", to: "errors#not_found"
     get "/422", to: "errors#unacceptable"
     get "/500", to: "errors#internal_error"
+
     #RUTAS PARA METODOLOGÍA TSP
     namespace :lanzamiento do
       #LANZAMIENTO::PERSONAL
@@ -55,19 +56,34 @@ Rails.application.routes.draw do
       get 'planes_calidad/index'
       get 'planes_calidad/create' => 'planes_calidad#create'
       get 'planes_calidad/update' => 'planes_calidad#update'
-      post 'planes_calidad/delete', to: 'planes_calidad#delete'
+      post 'planes_calidad/store' => 'planes_calidad#store'
+      post 'planes_calidad/edit/:id', to: 'planes_calidad#edit'
+      post 'planes_calidad/delete/:id', to: 'planes_calidad#delete'
     end
     namespace :estrategia do
       #ESTRATEGIA::CRITERIOS
       get 'criterios/index'
       get 'criterios/create' => 'criterios#create'
       get 'criterios/update' => 'criterios#create'
-      get 'criterios/delete', to: 'criterios#delete'
+      post 'criterios/store' => 'criterios#store'
+      post 'criterios/edit/:id', to: 'criterios#edit'
+      post 'criterios/delete/:id', to: 'criterios#delete'
       #ESTRATEGIA::DISEÑOS
       get 'disenos/index'
       get 'disenos/create' => 'disenos#create'
       get 'disenos/update' => 'disenos#create'
-      get 'disenos/delete', to: 'disenos#delete'
+      post 'disenos/store' => 'disenos#store'
+      post 'disenos/edit/:id', to: 'disenos#edit'
+      post 'disenos/delete/:id', to: 'disenos#delete'
+    end
+    namespace :requerimientos do
+      #REQUERIMIENTOS::REQUERIMIENTOS
+      get 'requerimientos/index'
+      get 'requerimientos/create' => 'requerimientos#create'
+      get 'requerimientos/update' => 'requerimientos#create'
+      post 'requerimientos/store' => 'requerimientos#store'
+      post 'requerimientos/edit/:id', to: 'requerimientos#edit'
+      post 'requerimientos/delete/:id', to: 'requerimientos#delete'
     end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

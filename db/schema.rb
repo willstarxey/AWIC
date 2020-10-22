@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_15_185701) do
+ActiveRecord::Schema.define(version: 2020_10_22_143216) do
 
   create_table "colaboradors", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 2020_10_15_185701) do
     t.boolean "lider", null: false
     t.index ["proyecto_id"], name: "index_colaboradors_on_proyecto_id"
     t.index ["user_id"], name: "index_colaboradors_on_user_id"
+  end
+
+  create_table "etrategia_criterios", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "etrategia_disenos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "lanzamiento_metas", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -30,10 +40,26 @@ ActiveRecord::Schema.define(version: 2020_10_15_185701) do
     t.index ["colaborador_id"], name: "index_lanzamiento_metas_on_colaborador_id"
   end
 
+  create_table "planeacion_planes_calidad", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "actividad", null: false
+    t.text "descripcion", null: false
+    t.string "tamano", null: false
+    t.integer "tiempo", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "colaborador_id"
+    t.index ["colaborador_id"], name: "index_planeacion_planes_calidad_on_colaborador_id"
+  end
+
   create_table "proyectos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "nombre", null: false
     t.string "descripcion", default: ""
     t.integer "n_ciclos", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "requerimientos_requerimientos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
