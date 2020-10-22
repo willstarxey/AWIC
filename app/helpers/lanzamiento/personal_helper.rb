@@ -1,0 +1,2 @@
+module Lanzamiento::PersonalHelper
+end

@@ -1,0 +1,2 @@
+module Estrategia::DisenosHelper
+end

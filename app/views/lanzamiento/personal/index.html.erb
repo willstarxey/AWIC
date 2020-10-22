@@ -1,0 +1,36 @@
+<h2 class="h2 text-white text-center"><%=Proyecto.find(params[:proyecto_id]).nombre%></h2>
+<br>
+<div class="card bg-aqua">
+    <div class="row card-header text-white">
+        <h3 class="col-md-8">Lanzamiento  : :  Personal</h3>
+        <%= link_to 'Agregar Usuario al Proyecto', lanzamiento_personal_add_path(:proyecto_id => params[:proyecto_id]), class: "btn btn-light col-md-4 float-right" %>
+    </div>
+    <table class="table table-hover table-sm table-dark card-body">
+        <thead>
+            <tr>
+            <th scope="col" style="width: 5%">ID</th>
+            <th scope="col" style="width: 40%">Nombre</th>
+            <th scope="col" style="width: 35%">Puesto</th>
+            <th scope="col" style="width: 20%">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% @colaboradors.each do |colab|%>
+                <tr>
+                <td scope="row"><%=colab.user.id%></td>
+                <td><%=colab.user.nombre%> <%=colab.user.app%> <%=colab.user.apm%></td>
+                <td><%=colab.user.puesto%></td>
+                <td>
+                    <form method="POST" action="/lanzamiento/personal/delete/<%=colab.id%>&proyecto_id=<%=params[:proyecto_id]%>" accept-charset="UTF-8" class="form-horizontal" role="form">
+                        <!-- Protección CSRF -->
+                        <%= token_tag nil %>
+                        <div class="d-inline-flex">
+                            <button type="submit" class="btn btn-danger" title="Eliminar" data-confirm="¿Desea eliminar al usuario <%=colab.user.nombre%> <%=colab.user.app%> <%=colab.user.apm%> del proyecto?" data-title="Eliminar" data-commit="Eliminar" data-cancel="Cancelar">Remover del Proyecto</button>
+                        </div>
+                    </form>    
+                </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+</div>

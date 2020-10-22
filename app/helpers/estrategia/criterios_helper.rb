@@ -1,0 +1,2 @@
+module Estrategia::CriteriosHelper
+end

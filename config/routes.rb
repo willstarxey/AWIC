@@ -35,15 +35,39 @@ Rails.application.routes.draw do
     get "/404", to: "errors#not_found"
     get "/422", to: "errors#unacceptable"
     get "/500", to: "errors#internal_error"
-
-    #LANZAMIENTO::METAS
+    #RUTAS PARA METODOLOGÍA TSP
     namespace :lanzamiento do
+      #LANZAMIENTO::PERSONAL
+      get 'personal/index'
+      get 'personal/add' => 'personal#add'
+      post 'personal/store' => 'personal#store'
+      post 'personal/delete/:id', to: 'personal#delete'
+      #LANZAMIENTO::METAS
       get 'metas/index'
       get 'metas/create' => 'metas#create'
       get 'metas/update' => 'metas#update'
       post 'metas/store' => 'metas#store'
       post 'metas/edit/:id', to: 'metas#edit'
       post 'metas/delete/:id', to: 'metas#delete'
+    end
+    namespace :planeacion do
+      #PLANEACION::PLANES_DE_CALIDAD
+      get 'planes_calidad/index'
+      get 'planes_calidad/create' => 'planes_calidad#create'
+      get 'planes_calidad/update' => 'planes_calidad#update'
+      post 'planes_calidad/delete', to: 'planes_calidad#delete'
+    end
+    namespace :estrategia do
+      #ESTRATEGIA::CRITERIOS
+      get 'criterios/index'
+      get 'criterios/create' => 'criterios#create'
+      get 'criterios/update' => 'criterios#create'
+      get 'criterios/delete', to: 'criterios#delete'
+      #ESTRATEGIA::DISEÑOS
+      get 'disenos/index'
+      get 'disenos/create' => 'disenos#create'
+      get 'disenos/update' => 'disenos#create'
+      get 'disenos/delete', to: 'disenos#delete'
     end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

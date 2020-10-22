@@ -44,7 +44,7 @@
                 Lanzamiento
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a href="#" class="dropdown-item">Personal</a>
+                <%= link_to "Personal", lanzamiento_personal_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
                   <%= link_to "Metas", lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
               </div>
             </div>
