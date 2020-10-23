@@ -1,17 +1,15 @@
-# Aplicación Web de Integración Continua
+# Aplicación Web de Integración Continua | AWIC TSP
 
-Esta aplicación está diseñada para cumplir la integración continua del desarrollo de software implementando la metodología TSP y sus herramientas.
+Aplicación de integración continua de los procesos de desarrollo de software basado en la metodologías TSP (Team Software Process)
 
-La aplicación permitirá abarcar los siguientes procesos:
+El objetivo principal es relacionar los procesos que intervienen en la calidad del software con respecto a la ejecución depruebas.
 
-* Desarrollo de la metodología TSP
+* Documentar datos de los procesos del desarrollo que sirvan como punto de métricas.
 
-* Evaluación de métricas de calidad
+* Evaluación de métricas de calidad en cada proceso con respecto a las pruebas.
 
-* Documentación TSP
+* Roles y permisos (Administrador de la Aplicación, Lider de equipos de desarrollo, usuarios colaboradores)
 
-* Roles y permisos
+* Administración de procesos de desarrollo por proyectos.
 
-* Asignación de tareas
-
-El objetivo principal es evaluar las métricas de calidad de los proyectos y conocer sus estados de desarrollo y conocer los estándares de calidad cumplidos.
+El objetivo principal es evaluar las métricas de calidad de los proyectos y conocer sus estados de desarrollo además conocer los estándares de calidad cumplidos en cada proceso de desarrollo.
