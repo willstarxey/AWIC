@@ -12,17 +12,28 @@
       <div class="col-md-1 bg-aqua">
       </div>
       <div class="col-md-11 p-5 bg-image-main full-size">
-          <div class="pb-5">
-            <%= link_to root_path do %>
-              <%= image_tag("AWIC-TSP (1).png", :alt => "AWIC-TSP", :width => '20%')%>
-            <% end %>
+          <div class="pb-5 row">
+            <div class="col-md-6">
+              <%= link_to root_path do %>
+                <%= image_tag("AWIC-TSP (1).png", :alt => "AWIC-TSP", :width => '40%')%>
+              <% end %>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+              <!-- Mensajes -->
+              <% flash.each do |type, msg| %>
+                <% if type == "notice"
+                      type = "info"
+                    end 
+                %>
+                <div class="col-md-6 alert alert-<%= type %> alert-dismissible fade show position-absolute float-right" id="<%= type %>">
+                  <%= msg %>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+              <% end %>
+            </div>
           </div>
-         <!-- Mensajes -->
-            <% flash.each do |type, msg| %>
-              <div class="alert alert-info">
-                <%= msg %>
-              </div>
-            <% end %>
             <%= yield %>
       </div>
     </div>
