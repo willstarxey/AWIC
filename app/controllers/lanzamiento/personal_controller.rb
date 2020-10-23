@@ -1,7 +1,7 @@
 class Lanzamiento::PersonalController < ApplicationController
 
   before_action :authenticate_user!
-  #load_and_authorize_resource
+  load_and_authorize_resource :class => Colaborador
 
   layout 'application_dashboard'
 
@@ -40,7 +40,7 @@ class Lanzamiento::PersonalController < ApplicationController
     @colaborador = Colaborador.find(params[:id])
     Colaborador.where(id: @colaborador).destroy_all
     flash[:success] = "Usuario eliminado del proyecto correctamente"
-    redirect_to lanzamiento_personal_index_path(:proyecto_id => params[:proyecto_id])
+    redirect_to lanzamiento_personal_index_path(:proyecto_id => @colaborador.proyecto_id)
   end
 
   private 

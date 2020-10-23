@@ -8,11 +8,13 @@ class Ability
     user ||= User.new #Usuario no logeado
     # Define abilities for the passed in user here. For example:
     if user.admin?
-      can :manage, :all
+      can :manage, Proyecto
+      can :manage, User
     elsif user.lider?
-      can :update, Proyecto do |proyecto|
-        proyecto.try(:user) == proyecto
-      end
+      can :read, Proyecto
+      can :update, Proyecto
+      can :manage, Colaborador
+      can :manage, Requerimientos::Requerimiento
       can :manage, Lanzamiento::Meta #do |meta|
         #meta.try(colaborador: { user_id: { :id => user.id } }) == meta
       #end

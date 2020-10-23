@@ -1,5 +1,5 @@
-module Etrategia
+module Estrategia
   def self.table_name_prefix
-    'etrategia_'
+    'estrategia_'
   end
 end

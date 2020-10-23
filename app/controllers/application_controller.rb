@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     end
 
     rescue_from CanCan::AccessDenied do
-        flash[:danger] = 'Usuario no Autorizado para esta acción, inicie sesión.'
+        flash[:danger] = 'Usuario no Autorizado para esta acción'
         redirect_to root_url
     end
 

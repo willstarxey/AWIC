@@ -60,8 +60,16 @@ ActiveRecord::Schema.define(version: 2020_10_22_143216) do
   end
 
   create_table "requerimientos_requerimientos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "descripcion", null: false
+    t.string "fuente", null: false
+    t.string "tipo", null: false
+    t.string "ambiente", null: false
+    t.string "restricciones", null: false
+    t.string "procesos", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "colaborador_id"
+    t.index ["colaborador_id"], name: "index_requerimientos_requerimientos_on_colaborador_id"
   end
 
   create_table "roles", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4", force: :cascade do |t|

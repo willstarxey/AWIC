@@ -7,7 +7,6 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body class="container-fluid">
     <div class="row full-size">
       <div class="col-md-2 bg-aqua px-0 justify-content-center">
@@ -33,6 +32,9 @@
               <% current_user.proyectos.each do |proyecto| %>
                 <%= link_to proyecto.nombre, dashboard_index_path(:proyecto_id => proyecto.id), class: 'dropdown-item' %>
               <% end %>
+              <% if current_user.proyectos.empty? %>
+                <a href="#" class="dropdown-item">No esta asociado a proyectos</a>
+              <% end %>
             </div>
           </div>
           <% if !params[:proyecto_id].nil? %>
@@ -44,7 +46,9 @@
                 Lanzamiento
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                <% if current_user.role_id == 2%>
                   <%= link_to "Personal", lanzamiento_personal_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
+                <% end %>
                   <%= link_to "Metas", lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
               </div>
             </div>
