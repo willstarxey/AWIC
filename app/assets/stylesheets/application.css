@@ -16,8 +16,8 @@
  /*@import "bootstrap";*/
 
  :root{
-    --aqua: #00a6af;
-    --aqua-hover: #00969e;
+    --aqua: #00969e;
+    --aqua-hover: #017e85;
 }
 
 .bg-aqua {

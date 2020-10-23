@@ -1,23 +1,23 @@
 <div class="container">
+    <% if params[:proyecto_id].nil? %>
 	<div class="row justify-content-md-center align-items-center">
         <h1 class="h1 text-white">BIENVENIDO AL SISTEMA <%= current_user.nombre %></h1>
     </div>
+    <% end %>
     <% if !params[:proyecto_id].nil? %>
-        <% proyecto = Proyecto.find(params[:proyecto_id]) %>
-        <br><br>
+        <% @proyecto.nombre %>
         <div class="row justify-content-md-center align-items-center">
-            <h1 class="h1 text-white text-center"><%= proyecto.nombre %></h1>
+            <h1 class="h1 text-white text-center"><%= @proyecto.nombre %></h1>
         </div>
         <br>
         <div class="row justify-content-md-center align-items-center">
             <br>
-            <h4 class="h4 text-white text-center"><%= proyecto.descripcion %></h4>
+            <h4 class="h4 text-white text-center"><%= @proyecto.descripcion %></h4>
         </div>
-        <br>
         <div class="row justify-content-md-center align-items-center">
-            <% if current_user.role_id == 2 %>
+            <% if current_user.role_id == 2 && @colaborador%>
             <div class="form-group d-inline-flex mt-3 px-1">
-                <%= link_to 'Detalles del Proyecto', proyectos_update_path(:proyecto_id => proyecto.id) , class: 'btn btn-light'%>
+                <%= link_to 'Detalles del Proyecto', proyectos_update_path(:proyecto_id => @proyecto.id) , class: 'btn btn-light'%>
             </div>
             <% end %>
             <div class="form-group d-inline-flex mt-3 px-1">

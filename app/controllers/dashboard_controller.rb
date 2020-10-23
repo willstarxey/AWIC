@@ -13,6 +13,10 @@ class DashboardController < ApplicationController
     if user.valid_password?("AWIC0000")
       redirect_to dashboard_change_path
     end
+    if params[:proyecto_id]
+      @proyecto = Proyecto.find(params[:proyecto_id])
+      @colaborador = Colaborador.where(user_id: user.id, proyecto_id: @proyecto.id).first.lider
+    end
   end
 
   def change
