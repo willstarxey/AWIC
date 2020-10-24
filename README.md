@@ -2,7 +2,7 @@
 
 Aplicación de integración continua de los procesos de desarrollo de software basado en la metodologías TSP (Team Software Process)
 
-AWIC TSP relaciona los procesos que intervienen en la calidad del software con respecto a la ejecución depruebas.
+AWIC TSP relaciona los procesos que intervienen en la calidad del software con respecto a la ejecución de pruebas.
 
 * Documentar datos de los procesos del desarrollo que sirvan como punto de métricas.
 

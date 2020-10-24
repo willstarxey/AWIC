@@ -1,47 +1,49 @@
-<h2 class="h2 text-white text-center"><%=@proyecto.nombre%></h2>
-<br>
-<div class="card bg-aqua">
-    <div class="row card-header text-white">
-        <h3 class="col-md-10">Lanzamiento  : :  Metas</h3>
-        <%= link_to 'Agregar Meta', lanzamiento_metas_create_path(:proyecto_id => @proyecto.id), class: "btn btn-light col-md-2 float-right" %>
-    </div>
-    <table class="table table-hover table-sm table-dark card-body">
-        <thead>
-            <tr>
-            <th scope="col">Descripción</th>
-            <th scope="col">Plazo</th>
-            <th scope="col" style="width: 10%">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        <% @colaboradors.each do |colab|%>
-            <% colab.lanzamiento_metas.each do |meta|%>
+<div class="container">
+    <h2 class="h2 text-white text-center"><%=@proyecto.nombre%></h2>
+    <br>
+    <div class="card bg-aqua">
+        <div class="row card-header text-white">
+            <h3 class="col-md-10">Lanzamiento  : :  Metas</h3>
+            <%= link_to 'Agregar Meta', lanzamiento_metas_create_path(:proyecto_id => @proyecto.id), class: "btn btn-light col-md-2 float-right" %>
+        </div>
+        <table class="table table-hover table-sm table-dark card-body">
+            <thead>
                 <tr>
-                <td><%=meta.descripcion%></td>
-                <td><%=meta.plazo%></td>
-                <td>
-                    <div class="row justify-content-center align-items-center">
-                        <div class="col-md-6 px-0">
-                            <div class="d-inline-flex">
-                                <a href="/lanzamiento/metas/update?id=<%= meta.id %>&proyecto_id=<%=@proyecto.id%>" title="Editar">
-                                    <%= image_tag("edit.png", :alt=>"Editar", :width => '30%', :style => " filter: invert(100%)" )%>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-md-6 px-0">
-                            <form method="POST" action="/lanzamiento/metas/delete/<%=meta.id%>&proyecto_id=<%=@proyecto.id%>" accept-charset="UTF-8" class="form-horizontal" role="form">
-                            <!-- Protección CSRF -->
-                            <%= token_tag nil %>
-                            <div class="d-inline-flex">
-                                <input type="submit" class="btn-delete" title="Eliminar" data-confirm="¿Desea eliminar la meta <%=meta.descripcion%>?" data-title="Eliminar Meta" data-commit="Eliminar" data-cancel="Cancelar">
-                            </div>
-                            </form>
-                        </div>
-                    </div>
-                </td>
+                <th scope="col">Descripción</th>
+                <th scope="col">Plazo</th>
+                <th scope="col" style="width: 10%">Acciones</th>
                 </tr>
+            </thead>
+            <tbody>
+            <% @colaboradors.each do |colab|%>
+                <% colab.lanzamiento_metas.each do |meta|%>
+                    <tr>
+                    <td><%=meta.descripcion%></td>
+                    <td><%=meta.plazo%></td>
+                    <td>
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-md-6 px-0">
+                                <div class="d-inline-flex">
+                                    <a href="/lanzamiento/metas/update?id=<%= meta.id %>&proyecto_id=<%=@proyecto.id%>" title="Editar">
+                                        <%= image_tag("edit.png", :alt=>"Editar", :width => '30%', :style => " filter: invert(100%)" )%>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 px-0">
+                                <form method="POST" action="/lanzamiento/metas/delete/<%=meta.id%>&proyecto_id=<%=@proyecto.id%>" accept-charset="UTF-8" class="form-horizontal" role="form">
+                                <!-- Protección CSRF -->
+                                <%= token_tag nil %>
+                                <div class="d-inline-flex">
+                                    <input type="submit" class="btn-delete" title="Eliminar" data-confirm="¿Desea eliminar la meta <%=meta.descripcion%>?" data-title="Eliminar Meta" data-commit="Eliminar" data-cancel="Cancelar">
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                    </tr>
+                <% end %>
             <% end %>
-        <% end %>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>

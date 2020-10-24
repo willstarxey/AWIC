@@ -1,11 +1,11 @@
-<div class="container">
-	<div class="row justify-content-md-center align-items-center">
-        <div class="col-md-10 align-item-center">
+<div class="container pt-5">
+	<div class="row">
+        <div class="col-md-12">
 		<div class="card text-center">
 			<div class="card-header">
 				<h3>Agregar Usuario</h3>
 			</div>
-			<div class="card-body bg-aqua justify-content-center">
+			<div class="card-body bg-aqua">
                 <form method="POST" action="store" accept-charset="UTF-8" role="form" id="crearusuario" name="crearusuario" enctype="multipart/form-data">
                 <!-- Protección CSRF -->
                 <%= token_tag nil %>
