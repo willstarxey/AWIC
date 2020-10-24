@@ -15,7 +15,7 @@ class DashboardController < ApplicationController
     end
     if params[:proyecto_id]
       @proyecto = Proyecto.find(params[:proyecto_id])
-      @colaborador = Colaborador.where(user_id: user.id, proyecto_id: @proyecto.id).first.lider
+      @lider = Colaborador.where(user_id: current_user.id, proyecto_id: @proyecto.id).first.lider
     end
   end
 

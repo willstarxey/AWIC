@@ -20,8 +20,8 @@
                     <div class="row">
 					    <div class="col-md-12 input-group form-group">
 					        <select type="select" class="form-control" name="user_id" id="user_id" required>
-                                <option value="" selected>Seleccione el Líder del Proyecto</option>
-                                <% User.where(role_id: ["2","3"]).each do |user| %>
+                                <option value="">Seleccione el Líder del Proyecto</option>
+                                <% @users.each do |user| %>
                                     <% if user.id == @lider && user.role_id == 2%>
                                         <option value="<%=user.id%>" selected><%=user.nombre%> <%=user.app%> <%=user.apm%> - <%=user.puesto%></option>
                                     <% else %>

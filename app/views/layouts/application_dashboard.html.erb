@@ -36,12 +36,13 @@
                 <li class="dropright">
                   <a href="#" class="btn btn-aqua btn-block dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Proyectos Líder <span class="caret"></span></a>
                   <ul class="dropdown-menu position-absolute">
-                    <% if !current_user.colaboradors.where(lider: true).empty? %>
-                      <% current_user.colaboradors.where(lider: true).each do |proyecto| %>
+                    <% c_user = current_user.colaboradors.where(lider: true)
+                      if !c_user.empty? %>
+                      <% c_user.each do |proyecto| %>
                         <%= link_to proyecto.proyecto.nombre, dashboard_index_path(:proyecto_id => proyecto.proyecto.id), class: 'dropdown-item' %>
                       <% end %>
                       <% else %>
-                      <li><a href="#">No tiene proyectos</a></li>
+                      <li><%= link_to "No tiene proyectos", dashboard_index_path, class: 'dropdown-item' %></li>
                     <%end%>
                   </ul>
                 </li>
@@ -50,8 +51,9 @@
                 <li class="dropright">
                   <a href="#" class="btn btn-aqua btn-block dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Proyectos Asociado <span class="caret"></span></a>
                   <ul class="dropdown-menu position-absolute">
-                    <% if !current_user.colaboradors.where(lider: false).empty? %>
-                      <% current_user.colaboradors.where(lider: false).each do |proyecto| %>
+                    <% c_user = current_user.colaboradors.where(lider: false)
+                      if !c_user.empty? %>
+                      <% c_user.each do |proyecto| %>
                         <%= link_to proyecto.proyecto.nombre, dashboard_index_path(:proyecto_id => proyecto.proyecto.id), class: 'dropdown-item' %>
                       <% end %>
                       <% else %>
@@ -181,8 +183,8 @@
         <% if !current_user.nil? %>
 	        <%= link_to destroy_user_session_path, class: 'btn btn-aqua btn-sm ml-4' , method: :delete do %>Cerrar Sesión<% end %>
       </div>
-      <div class="col-md-10 justify-content-end text-right">
-        <p class="text-white pr-2 m-0">Sesión de: <%=current_user.nombre%> <%=current_user.app%> <%=current_user.apm%> | <%=current_user.puesto%></div>
+      <div class="col-md-10 d-flex justify-content-end text-right align-items-center">
+        <p class="text-white pr-2 m-0"><strong>Sesión:</strong> <%=current_user.nombre%> <%=current_user.app%> <%=current_user.apm%> | <%=current_user.puesto%></div>
       </div>
       <% end %>
     </footer>
