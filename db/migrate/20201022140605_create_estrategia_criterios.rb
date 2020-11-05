@@ -1,6 +1,6 @@
-class CreateEtrategiaCriterios < ActiveRecord::Migration[6.0]
+class CreateEstrategiaCriterios < ActiveRecord::Migration[6.0]
   def change
-    create_table :etrategia_criterios do |t|
+    create_table :estrategia_criterios do |t|
       t.text :descripcion
       t.integer :ciclo, null: false, default: 1
       t.timestamps

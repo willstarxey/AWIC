@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_11_04_055915) do
 
-  create_table "colaboradors", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "colaboradors", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "proyecto_id"
     t.datetime "added_at", null: false
@@ -21,113 +21,173 @@ ActiveRecord::Schema.define(version: 2020_11_04_055915) do
     t.index ["user_id"], name: "index_colaboradors_on_user_id"
   end
 
-  create_table "diseno_estandares", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "diseno_estructuras", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "diseno_plan_pruebas", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "diseno_tipos_estandares", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "estrategia_estimaciones", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "etrategia_criterios", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.text "descripcion"
-    t.integer "ciclo"
+  create_table "diseno_estandares", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nombre", null: false
+    t.text "descripcion", null: false
+    t.integer "ciclo", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "colaborador_id"
-    t.index ["colaborador_id"], name: "index_etrategia_criterios_on_colaborador_id"
+    t.bigint "diseno_tipo_id"
+    t.index ["colaborador_id"], name: "index_diseno_estandares_on_colaborador_id"
+    t.index ["diseno_tipo_id"], name: "index_diseno_estandares_on_diseno_tipo_id"
   end
 
-  create_table "etrategia_disenos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "diseno_estructuras", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nombre", null: false
+    t.text "descripcion", null: false
+    t.integer "ciclo", default: 1, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "colaborador_id"
+    t.index ["colaborador_id"], name: "index_diseno_estructuras_on_colaborador_id"
+  end
+
+  create_table "diseno_plan_pruebas", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nombre", null: false
+    t.text "descripcion", null: false
+    t.integer "ciclo", default: 1, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "colaborador_id"
+    t.index ["colaborador_id"], name: "index_diseno_plan_pruebas_on_colaborador_id"
+  end
+
+  create_table "diseno_tipos_estandares", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nombre", null: false
+    t.text "descripcion", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "estrategia_criterios", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "descripcion"
+    t.integer "ciclo", default: 1, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "colaborador_id"
+    t.index ["colaborador_id"], name: "index_estrategia_criterios_on_colaborador_id"
+  end
+
+  create_table "estrategia_estimaciones", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "funcion", null: false
+    t.text "descripcion", null: false
+    t.integer "tamano", null: false
+    t.integer "tiempo", null: false
+    t.integer "ciclo", default: 1, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "colaborador_id"
+    t.index ["colaborador_id"], name: "index_estrategia_estimaciones_on_colaborador_id"
+  end
+
+  create_table "etrategia_disenos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "descripcion_producto"
     t.string "tamano"
+    t.integer "ciclo", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "colaborador_id"
     t.index ["colaborador_id"], name: "index_etrategia_disenos_on_colaborador_id"
   end
 
-  create_table "implementacion_criterios_calidad", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "implementacion_criterios_calidad", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "descripcion", null: false
+    t.integer "ciclo", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "colaborador_id"
+    t.index ["colaborador_id"], name: "index_implementacion_criterios_calidad_on_colaborador_id"
   end
 
-  create_table "lanzamiento_metas", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "lanzamiento_metas", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "descripcion", default: "", null: false
     t.string "plazo", default: "", null: false
+    t.integer "ciclo", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "colaborador_id"
     t.index ["colaborador_id"], name: "index_lanzamiento_metas_on_colaborador_id"
   end
 
-  create_table "planeacion_planes_calidad", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "planeacion_planes_calidad", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "actividad", null: false
     t.text "descripcion", null: false
     t.string "tamano", null: false
     t.integer "tiempo", null: false
+    t.integer "ciclo", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "colaborador_id"
     t.index ["colaborador_id"], name: "index_planeacion_planes_calidad_on_colaborador_id"
   end
 
-  create_table "postmortem_resumenes", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "postmortem_resumenes", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "ciclo", null: false
+    t.text "descripcion", null: false
+    t.json "lanzamiento", null: false
+    t.json "estrategia", null: false
+    t.json "planeacion", null: false
+    t.json "requerimientos", null: false
+    t.json "diseno", null: false
+    t.json "implementacion", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "proyecto_id"
+    t.index ["proyecto_id"], name: "index_postmortem_resumenes_on_proyecto_id"
   end
 
-  create_table "proyectos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "proyectos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre", null: false
     t.string "descripcion", default: ""
     t.integer "n_ciclos", default: 0
+    t.integer "ciclo_actual", default: 1, null: false
+    t.boolean "finalizado", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "pruebas_pruebas", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "pruebas_pruebas", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "nombre", null: false
+    t.text "descripcion", null: false
+    t.text "entrada", null: false
+    t.text "r_obtenido", null: false
+    t.text "r_deseado", null: false
+    t.boolean "cumple", default: false, null: false
+    t.json "lanzamiento", null: false
+    t.json "estrategia", null: false
+    t.json "planeacion", null: false
+    t.json "requerimientos", null: false
+    t.json "diseno", null: false
+    t.json "implementacion", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "colaborador_id"
+    t.index ["colaborador_id"], name: "index_pruebas_pruebas_on_colaborador_id"
   end
 
-  create_table "requerimientos_requerimientos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
-    t.string "descripcion", null: false
+  create_table "requerimientos_requerimientos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "descripcion", null: false
     t.string "fuente", null: false
     t.string "tipo", null: false
     t.string "ambiente", null: false
-    t.string "restricciones", null: false
+    t.text "restricciones", null: false
     t.string "procesos", null: false
+    t.integer "ciclo", default: 1, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "colaborador_id"
     t.index ["colaborador_id"], name: "index_requerimientos_requerimientos_on_colaborador_id"
   end
 
-  create_table "roles", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "roles", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre"
     t.string "descripcion"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "users", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci", force: :cascade do |t|
+  create_table "users", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre", null: false
     t.string "app", null: false
     t.string "apm", null: false
