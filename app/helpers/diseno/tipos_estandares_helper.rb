@@ -1,0 +1,2 @@
+module Diseno::TiposEstandaresHelper
+end

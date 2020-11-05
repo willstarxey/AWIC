@@ -32,11 +32,11 @@ class Lanzamiento::MetasController < ApplicationController
     if(@meta.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Meta Creada Correctamente"
-      redirect_to lanzamiento_metas_index_path(:proyecto_id => @meta.colaborador.proyecto_id)
+      redirect_to lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id])
     else
-      #Impresión del proceso satisfactorio
+      #Impresión del proceso de error
       flash[:danger] = "No se pudo crear la meta"
-      redirect_to lanzamiento_metas_index_path(:proyecto_id => @meta.colaborador.proyecto_id)
+      redirect_to lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id])
     end
   end
 
@@ -46,11 +46,11 @@ class Lanzamiento::MetasController < ApplicationController
     if @meta.update(parametros)
       #Impresión del proceso satisfactorio
       flash[:success] = "Meta Actualizada Correctamente"
-      redirect_to lanzamiento_metas_index_path(:proyecto_id => @meta.colaborador.proyecto_id)
+      redirect_to lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id])
     else
-      #Impresión del proceso satisfactorio
+      #Impresión del proceso de error
       flash[:danger] = "No se pudo actualizar la meta"
-      redirect_to lanzamiento_metas_index_path(:proyecto_id => @meta.colaborador.proyecto_id)
+      redirect_to lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id])
     end
   end
 
@@ -61,7 +61,7 @@ class Lanzamiento::MetasController < ApplicationController
     rescue ActiveRecord::RecordNotFound => e
       @meta = nil
       flash[:danger] = "Meta No Registrado"
-      redirect_to lanzamiento_metas_index_path(:proyecto_id => @meta.colaborador.proyecto_id)
+      redirect_to lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id])
     end
   end
 
@@ -69,7 +69,7 @@ class Lanzamiento::MetasController < ApplicationController
     @meta = Lanzamiento::Meta.find(params[:id])
     Lanzamiento::Meta.where(id: @meta).destroy_all
     flash[:success] = "Meta Eliminada"
-    redirect_to lanzamiento_metas_index_path(:proyecto_id => @meta.colaborador.proyecto_id)
+    redirect_to lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   private

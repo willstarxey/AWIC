@@ -14,13 +14,38 @@ class Ability
       can :read, Proyecto
       can :update, Proyecto
       can :manage, Colaborador
-      can :manage, Requerimientos::Requerimiento
       can :manage, Lanzamiento::Meta #do |meta|
         #meta.try(colaborador: { user_id: { :id => user.id } }) == meta
       #end
+      can :manage, Estrategia::Diseno
+      can :manage, Estrategia::Criterio
+      can :manage, Estrategia::Estimacion
+      can :manage, Planeacion::PlanCalidad
+      can :manage, Requerimientos::Requerimiento
+      can :manage, Diseno::Estructura
+      can :manage, Diseno::PlanPruebas
+      can :manage, Diseno::Estandar
+      can :manage, Diseno::TipoEstandar
+      can :manage, Implementacion::CriterioCalidad
+      can :manage, Pruebas::Prueba
+      can :manage, Postmortem::Resumen
     elsif user.usuario?
       can :read, Proyecto, user_id: user.id
-      #can :update, Proyecto, user_id: user.id
+      can :manage, Lanzamiento::Meta #do |meta|
+        #meta.try(colaborador: { user_id: { :id => user.id } }) == meta
+      #end
+      can :manage, Estrategia::Diseno
+      can :manage, Estrategia::Criterio
+      can :manage, Estrategia::Estimacion
+      can :manage, Planeacion::PlanCalidad
+      can :manage, Requerimientos::Requerimiento
+      can :manage, Diseno::Estructura
+      can :manage, Diseno::PlanPruebas
+      can :manage, Diseno::Estandar
+      can :manage, Diseno::TipoEstandar
+      can :manage, Implementacion::CriterioCalidad
+      can :manage, Pruebas::Prueba
+      can :manage, Postmortem::Resumen
     end
     
     #

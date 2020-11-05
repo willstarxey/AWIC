@@ -1,2 +1,49 @@
-<h1>Estrategia::Disenos#index</h1>
-<p>Find me in app/views/estrategia/disenos/index.html.erb</p>
+<div class="container">
+    <h2 class="h2 text-white text-center"><%=@proyecto.nombre%></h2>
+    <br>
+    <div class="card bg-aqua">
+        <div class="row card-header text-white">
+            <h3 class="col-md-10">Estrategia  : :  Diseños</h3>
+            <%= link_to 'Agregar Diseño', estrategia_disenos_create_path(:proyecto_id => @proyecto.id), class: "btn btn-light col-md-2 float-right" %>
+        </div>
+        <table class="table table-hover table-sm table-dark card-body">
+            <thead>
+                <tr>
+                <th scope="col">Descripcion del Producto</th>
+                <th scope="col">Tamaño</th>
+                <th scope="col" style="width: 10%">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @colaboradors.each do |colab|%>
+                <% colab.estrategia_disenos.each do |diseno|%>
+                    <tr>
+                    <td><%=diseno.descripcion%></td>
+                    <td><%=diseno.tamano%></td>
+                    <td>
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-md-6 px-0">
+                                <div class="d-inline-flex">
+                                    <a href="/estrategia/disenos/update?id=<%= diseno.id %>&proyecto_id=<%=@proyecto.id%>" title="Editar">
+                                        <%= image_tag("edit.png", :alt=>"Editar", :width => '30%', :style => " filter: invert(100%)" )%>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 px-0">
+                                <form method="POST" action="/estrategia/disenos/delete/<%=diseno.id%>&proyecto_id=<%=@proyecto.id%>" accept-charset="UTF-8" class="form-horizontal" role="form">
+                                <!-- Protección CSRF -->
+                                <%= token_tag nil %>
+                                <div class="d-inline-flex">
+                                    <input type="submit" class="btn-delete" title="Eliminar" data-confirm="¿Desea eliminar el diseño <%=diseno.descripcion%>?" data-title="Eliminar Diseño" data-commit="Eliminar" data-cancel="Cancelar">
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                    </tr>
+                <% end %>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

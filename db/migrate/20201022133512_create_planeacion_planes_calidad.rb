@@ -5,6 +5,7 @@ class CreatePlaneacionPlanesCalidad < ActiveRecord::Migration[6.0]
       t.text :descripcion, null: false
       t.string :tamano, null: false
       t.integer :tiempo, null: false
+      t.integer :ciclo, null: false, default: 1
       t.timestamps
       t.belongs_to :colaborador, foreign_key: true
     end

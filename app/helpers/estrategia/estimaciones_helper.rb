@@ -1,0 +1,2 @@
+module Estrategia::EstimacionesHelper
+end

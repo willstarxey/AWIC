@@ -3,6 +3,7 @@ class CreateLanzamientoMetas < ActiveRecord::Migration[6.0]
     create_table :lanzamiento_metas do |t|
       t.string :descripcion, null: false, default: ""
       t.string :plazo, null: false, default: ""
+      t.integer :ciclo, null: false, default: 1
       t.timestamps
       t.belongs_to :colaborador, foreign_key: true
     end

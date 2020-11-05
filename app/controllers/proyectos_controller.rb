@@ -1,7 +1,7 @@
 class ProyectosController < ApplicationController
 
   before_action :authenticate_user!
-  load_and_authorize_resource
+  #load_and_authorize_resource
   
   @root_url = "/proyectos/index"
   layout 'application_dashboard'
@@ -48,30 +48,32 @@ class ProyectosController < ApplicationController
     @proyecto
   end
 
-  #Editar de la vista del administrador de la aplicación
+  #Edición del Proyecto con respecto a la vista del Administrador
   def edit
     @proyecto = Proyecto.find(params[:id])
     @proyecto = Proyecto.where(id: @proyecto)
+    #Obtiene a un calaborador relacionado al proyecto con respecto a los parametros del formulario
     @colab = Colaborador.where(user_id: params[:user_id], proyecto_id: params[:id])
     #Actualizacion de los parametros del proyecto
-    if @proyecto.update(parametros)
-      @user = @proyecto.first.colaboradors.where(lider: 1).first.user
-      if @user.colaboradors.where(lider: 1).length == 1
-        update_rol(@proyecto.colaboradors.where(lider: 1).first.user_id, "3")
+    if @proyecto.update(parametros)#Actualiza proyecto con los paramtetros del formulario
+      @user = @proyecto.first.colaboradors.where(lider: 1).first.user#Obtiene al lider del proyecto
+      @proyectos_length = @user.colaboradors.where(lider: 1).length#Obtiene la cantidad deproyectos que lidera el usuario
+      if @proyectos_length == 1#si el lider tiene solo un proyecto asignado
+        update_rol(@proyecto.colaboradors.where(lider: 1).first.user_id, "3")#Su rol de usuario cambia a Usuario común
         #Redireccionamiento a la visa de busqueda
         flash[:success] = "Proyecto Actualizado Correctamente"
         redirect_to proyectos_index_path
-      elsif @user.colaboradors.where(lider: 1).length > 1
+      elsif @proyectos_length > 1#Si tiene más de un proyecto que lidera
         #Redireccionamiento a la visa de busqueda
         flash[:success] = "Proyecto Actualizado Correctamente"
         redirect_to proyectos_index_path
       end
-      @proyecto.first.colaboradors.where(lider: 1).first.destroy
-      if @colab.empty?
+      @proyecto.first.colaboradors.where(lider: 1).first.destroy#Elimina al lider del proyecto
+      if @colab.empty?#si no existe el colaborador, lo crea
         @colaborador = Colaborador.new(user_id: params[:user_id], proyecto_id: params[:id], added_at: Time.now, lider: 1)
         @colaborador.save
         update_rol(params[:user_id], "2")
-      else
+      else #Si ya existe el colaborador en el proyecto, le cambia su estado de usuario común a Lider de proyecto
         @colab.update(lider: 1)
         update_rol(@colab.first.user_id, "2")
       end
@@ -147,7 +149,7 @@ class ProyectosController < ApplicationController
     params.permit(:nombre, :descripcion, :n_ciclos)
   end
 
-  #Actualización de roles a usuarios
+  #Actualización de roles a usuarios (User:ID, Rol:ID)
   def update_rol(user_id, rol)
     @user = User.find(user_id)
     @user = User.where(id: @user)

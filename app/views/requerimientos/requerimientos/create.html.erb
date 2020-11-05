@@ -1,2 +1,81 @@
-<h1>Requerimientos::Requerimientos#create</h1>
-<p>Find me in app/views/requerimientos/requerimientos/create.html.erb</p>
+<div class="container">
+    <h2 class="h2 text-white text-center"><%=Proyecto.find(params[:proyecto_id]).nombre%></h2>
+    <br>
+    <div class="container">
+        <div class="row justify-content-md-center align-items-center">
+            <div class="col-md-10 align-item-center">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Requerimientos  : :  Requerimientos | Crear Rquerimiento</h3>
+                </div>
+                <div class="card-body bg-aqua justify-content-center">
+                    <form method="POST" action="store" accept-charset="UTF-8" role="form" id="crearrequerimiento" name="crearrequerimiento" enctype="multipart/form-data"> 
+                        <!-- Protección CSRF -->
+                        <%= token_tag nil %>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input type="hidden" id="proyecto_id" name="proyecto_id" value="<%=params[:proyecto_id]%>">
+                                <label class="text-white">Descripción</label>
+                            </div>
+                            <div class="col-md-10 input-group form-group">
+                                <textarea type="text" class="form-control" placeholder="Descripción" id="descripcion" name="descripcion" required></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="text-white">Fuente</label>
+                            </div>
+                            <div class="col-md-10 input-group form-group">
+                                <input type="text" class="form-control" placeholder="Fuente" id="fuente" name="fuente" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="text-white">Tipo</label>
+                            </div>
+                            <div class="col-md-10 input-group form-group">
+                                <select type="select" class="form-control" name="tipo" id="tipo">
+                                    <option value="" selected>Seleccione un Tipo</option>
+                                    <option value="Funcional">Funcional</option>
+                                    <option value="No Funcional">No Funcional</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="text-white">Ambiente</label>
+                            </div>
+                            <div class="col-md-10 input-group form-group">
+                                <input type="text" class="form-control" placeholder="Ambiente" id="ambiente" name="ambiente" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="text-white">Restricciones</label>
+                            </div>
+                            <div class="col-md-10 input-group form-group">
+                                <textarea type="text" class="form-control" placeholder="Restricciones" id="restricciones" name="restricciones" required></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="text-white">Procesos</label>
+                            </div>
+                            <div class="col-md-10 input-group form-group">
+                                <input type="text" class="form-control" placeholder="Procesos" id="procesos" name="procesos" required>
+                            </div>
+                        </div>
+                        <div class="form-group d-inline-flex mt-3">
+                            <button type="submit" class="btn btn-light">Guardar</button>
+                        </div>
+                        <div class="form-group d-inline-flex mt-3">
+                            <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

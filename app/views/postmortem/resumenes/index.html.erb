@@ -1,0 +1,27 @@
+<div class="container">
+    <h2 class="h2 text-white text-center"><%=@proyecto.nombre%></h2>
+    <br>
+    <div class="card bg-aqua">
+        <div class="row card-header text-white">
+            <h3 class="col-md-10">Postmortem  : :  Resumenes</h3>
+        </div>
+        <table class="table table-hover table-sm table-dark card-body">
+            <thead>
+                <tr>
+                <th scope="col">Ciclo</th>
+                <th scope="col">Descripción</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @colaboradors.each do |colab|%>
+                <% colab.postmortem_resumenes.each do |resumen|%>
+                    <tr>
+                    <td><%=resumen.ciclo%></td>
+                    <td><a href="/postmortem/resumenes/show?id=<%= calidad.id %>&proyecto_id=<%=@proyecto.id%>">Ver el resumen completo del ciclo</a></td>
+                    </tr>
+                <% end %>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

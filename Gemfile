@@ -49,11 +49,11 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-#Gemas para AWIC
+#Gemas para Authentication | Roles y Permisos
 gem 'devise'
 gem 'cancancan'
 
-#Gemas de diseño
+#Gemas de diseño CSS | JQuery | Bootstrap
 gem 'data-confirm-modal'
 gem 'jquery-rails'
 gem 'bootstrap' ,  '~> 4.0'

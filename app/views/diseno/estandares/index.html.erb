@@ -1,0 +1,49 @@
+<div class="container">
+    <h2 class="h2 text-white text-center"><%=@proyecto.nombre%></h2>
+    <br>
+    <div class="card bg-aqua">
+        <div class="row card-header text-white">
+            <h3 class="col-md-10">Diseño  : :  Estándares</h3>
+            <%= link_to 'Agregar Estándar', diseno_estandares_create_path(:proyecto_id => @proyecto.id), class: "btn btn-light col-md-2 float-right" %>
+        </div>
+        <table class="table table-hover table-sm table-dark card-body">
+            <thead>
+                <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col" style="width: 10%">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @colaboradors.each do |colab|%>
+                <% colab.diseno_estandares.each do |estandar|%>
+                    <tr>
+                    <td><%=estandar.nombre%></td>
+                    <td><%=estandar.descripcion%></td>
+                    <td>
+                        <div class="row justify-content-center align-items-center">
+                            <div class="col-md-6 px-0">
+                                <div class="d-inline-flex">
+                                    <a href="/diseno/estandares/update?id=<%= estandar.id %>&proyecto_id=<%=@proyecto.id%>" title="Editar">
+                                        <%= image_tag("edit.png", :alt=>"Editar", :width => '30%', :style => " filter: invert(100%)" )%>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 px-0">
+                                <form method="POST" action="/diseno/estandares/delete/<%=estandar.id%>&proyecto_id=<%=@proyecto.id%>" accept-charset="UTF-8" class="form-horizontal" role="form">
+                                <!-- Protección CSRF -->
+                                <%= token_tag nil %>
+                                <div class="d-inline-flex">
+                                    <input type="submit" class="btn-delete" title="Eliminar" data-confirm="¿Desea eliminar el estándar <%=estandar.nombre%>?" data-title="Eliminar Estándar" data-commit="Eliminar" data-cancel="Cancelar">
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                    </tr>
+                <% end %>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

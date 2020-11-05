@@ -1,0 +1,2 @@
+module Implementacion::CriteriosCalidadHelper
+end

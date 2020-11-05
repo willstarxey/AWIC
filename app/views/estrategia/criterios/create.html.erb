@@ -1,2 +1,36 @@
-<h1>Estrategia::Criterios#create</h1>
-<p>Find me in app/views/estrategia/criterios/create.html.erb</p>
+<div class="container">
+    <h2 class="h2 text-white text-center"><%=Proyecto.find(params[:proyecto_id]).nombre%></h2>
+    <br>
+    <div class="container">
+        <div class="row justify-content-md-center align-items-center">
+            <div class="col-md-10 align-item-center">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Estrategia  : :  Criterios | Crear Criterio</h3>
+                </div>
+                <div class="card-body bg-aqua justify-content-center">
+                    <form method="POST" action="store" accept-charset="UTF-8" role="form" id="crearcriterio" name="crearcriterio" enctype="multipart/form-data"> 
+                        <!-- Protección CSRF -->
+                        <%= token_tag nil %>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="text-white">Descripción</label>
+                            </div>
+                            <div class="col-md-10 input-group form-group">
+                                <textarea type="text" class="form-control" placeholder="Descripción" id="descripcion" name="descripcion" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group d-inline-flex mt-3">
+                            <button type="submit" class="btn btn-light">Guardar</button>
+                        </div>
+                        <div class="form-group d-inline-flex mt-3">
+                            <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

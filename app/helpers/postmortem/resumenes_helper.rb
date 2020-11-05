@@ -1,0 +1,2 @@
+module Postmortem::ResumenesHelper
+end

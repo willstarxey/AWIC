@@ -1,0 +1,2 @@
+module Pruebas::PruebasHelper
+end

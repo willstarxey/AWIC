@@ -1,0 +1,47 @@
+<div class="container">
+    <h2 class="h2 text-white text-center"><%=Proyecto.find(params[:proyecto_id]).nombre%></h2>
+    <br>
+    <div class="container">
+        <div class="row justify-content-md-center align-items-center">
+            <div class="col-md-10 align-item-center">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3>Diseño  : :  Estándares | Actualizar Estándar</h3>
+                </div>
+                <div class="card-body bg-aqua justify-content-center">
+                <% @diseno.each do |diseno| %>
+                    <form method="POST" action="edit/<%= diseno.id %>" accept-charset="UTF-8" role="form" id="actualizarestandar" name="actualizarestandar" enctype="multipart/form-data"> 
+                        <!-- Protección CSRF -->
+                        <%= token_tag nil %>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <input type="hidden" id="proyecto_id" name="proyecto_id" value="<%=params[:proyecto_id]%>">
+                                <label class="text-white">Nombre</label>
+                            </div>
+                            <div class="col-md-10 input-group form-group">
+                                <input type="text" class="form-control" placeholder="Nombre" id="nombre" name="nombre" required value="<%=diseno.nombre%>">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="text-white">Descripción</label>
+                            </div>
+                            <div class="col-md-10 input-group form-group">
+                                <textarea type="text" class="form-control" placeholder="Descripción" id="descripcion" name="descripcion" required><%=diseno.descripcion%></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group d-inline-flex mt-3">
+                            <button type="submit" class="btn btn-light">Guardar</button>
+                        </div>
+                        <div class="form-group d-inline-flex mt-3">
+                            <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
+                        </div>
+                    </form>
+                    </div>
+                    <%end%>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

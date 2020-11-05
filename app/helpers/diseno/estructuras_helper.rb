@@ -1,0 +1,2 @@
+module Diseno::EstructurasHelper
+end

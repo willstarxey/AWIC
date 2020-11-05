@@ -10,6 +10,7 @@ class DashboardController < ApplicationController
 
   def index
     user = User.find_by_id(current_user.id)
+    @proyectos = Proyecto.all
     if user.valid_password?("AWIC0000")
       redirect_to dashboard_change_path
     end

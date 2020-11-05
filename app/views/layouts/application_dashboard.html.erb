@@ -20,14 +20,40 @@
           <% end %>
 	      <% end %>
         <% if current_user.admin? %>
-	        <%= link_to "Usuarios", users_index_path, class: 'btn btn-lg btn-block btn-aqua' %>
-          <%= link_to "Proyectos", proyectos_index_path, class: 'btn btn-lg btn-block btn-aqua' %>
+          <nav class="navbar navbar-default d-block p-0">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="btn btn-aqua btn-lg btn-block navbar-toggle collapsed dropdown-toggle" data-toggle="collapse" data-target="#proyectos_menu" aria-expanded="false">
+                <strong>Usuarios</strong>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse text-center" id="proyectos_menu">
+              <ul class="nav navbar-nav navbar-center">
+                <li><a href="<%=users_create_path%>" class="btn btn-aqua btn-block"><%= image_tag("anadir.png", :alt => "add-user", :width => '10%', :class => 'pr-1')%> Agregar Usuario</a></li>
+                <li><a href="<%=users_search_path%>" class="btn btn-aqua btn-block"><%= image_tag("buscar_u.png", :alt => "add-user", :width => '10%', :class => 'pr-1')%> Buscar Usuario</a></li>
+              </ul>
+            </div><!-- /.navbar-collapse Usuarios -->
+            <div class="navbar-header">
+              <button type="button" class="btn btn-aqua btn-lg btn-block navbar-toggle collapsed dropdown-toggle" data-toggle="collapse" data-target="#users_menu" aria-expanded="false">
+                <strong>Proyectos</strong>
+              </button>
+            </div>
+            <div class="collapse navbar-collapse text-center" id="users_menu">
+              <ul class="nav navbar-nav navbar-center">
+                <ul class="nav navbar-nav navbar-center">
+                  <li><a href="<%=proyectos_create_path%>" class="btn btn-aqua btn-block"><%= image_tag("project-management.png", :alt => "add-project", :width => '10%', :class => 'pr-1')%> Agregar Proyecto</a></li>
+                  <li><a href="<%=proyectos_search_path%>" class="btn btn-aqua btn-block"><%= image_tag("buscar_p.png", :alt => "search-project", :width => '10%', :class => 'pr-1')%> Buscar Proyecto</a></li>
+                  <li><a href="#" class="btn btn-aqua btn-block"><%= image_tag("buscar_p.png", :alt => "search-project", :width => '10%', :class => 'pr-1')%> Avance Proyectos</a></li>
+              </ul>
+              </ul>
+            </div><!-- /.navbar-collapse Proyectos -->
+        </nav>
         <% end %>
         <% if !current_user.admin? && !current_user.proyectos.nil?%>
         <nav class="navbar navbar-default d-block p-0">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-              <button type="button" class="btn btn-aqua btn-lg btn-block navbar-toggle collapsed" data-toggle="collapse" data-target="#proyectos_menu" aria-expanded="false">
+              <button type="button" class="btn btn-aqua btn-lg btn-block navbar-toggle collapsed dropdown-toggle" data-toggle="collapse" data-target="#proyectos_menu" aria-expanded="false">
                 <strong>Proyectos</strong>
               </button>
             </div>
@@ -114,10 +140,10 @@
                 Diseño
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a href="#" class="dropdown-item">Estructuras</a>
-                <a href="#" class="dropdown-item">Planes de Pruebas</a>
-                <a href="#" class="dropdown-item">Estándares</a>
-                <a href="#" class="dropdown-item">Reúsos</a>
+                <%= link_to "Estructuras", diseno_estructuras_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
+                <%= link_to "Planes de Pruebas", diseno_planes_pruebas_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
+                <%= link_to "Estrándares", diseno_estandares_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
+                <%= link_to "Tipos Estándares", diseno_tipos_estandares_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
               </div>
             </div>
             <!--IMPLEMENTACIÓN-->
@@ -126,9 +152,7 @@
                 Implementación
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a href="#" class="dropdown-item">Estructuras</a>
-                <a href="#" class="dropdown-item">Planes de Pruebas</a>
-                <a href="#" class="dropdown-item">Estándares</a>
+                <%= link_to "Criterios de Calidad", implementacion_criterios_calidad_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
               </div>
             </div>
             <!--PRUEBAS-->
@@ -137,10 +161,7 @@
                 Pruebas
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a href="#" class="dropdown-item">Estructuras</a>
-                <a href="#" class="dropdown-item">Planes de Pruebas</a>
-                <a href="#" class="dropdown-item">Estándares</a>
-                <a href="#" class="dropdown-item">Reúsos</a>
+                <%= link_to "Pruebas", pruebas_pruebas_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
               </div>
             </div>
             <!--POSTMORTEM-->
@@ -149,9 +170,7 @@
                 Postmortem
               </button>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a href="#" class="dropdown-item">Estructuras</a>
-                <a href="#" class="dropdown-item">Planes de Pruebas</a>
-                <a href="#" class="dropdown-item">Estándares</a>
+                <%= link_to "Resumenes", postmortem_resumenes_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
               </div>
             </div>
           <% end %>
