@@ -56,4 +56,4 @@ default: &default
 
 production:
   <<: *default
-  database: id15552162_admin_test
+  database: id15552162_awic
