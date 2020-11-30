@@ -29,6 +29,19 @@
                                 <textarea type="text" class="form-control" placeholder="Descripción" id="descripcion" name="descripcion" required></textarea>
                             </div>
                         </div>
+                        <div class="row align-items-center justify-content-center">
+                            <div class="col-md-2">
+                                <label class="text-white">Tipo de Estándar</label>
+                            </div>
+                            <div class="col-md-10 input-group form-group">
+                                <select type="select" class="form-control" name="diseno_tipo_estandar_id" id="diseno_tipo_estandar_id" required>
+                                    <option value="" selected>Seleccione un tipo de estándar</option>
+                                    <% @tipo_estandares.each do |tipo_estandar| %>
+                                        <option value="<%=tipo_estandar.id%>"><%=tipo_estandar.descripcion%></option>
+                                    <% end %>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group d-inline-flex mt-3">
                             <button type="submit" class="btn btn-light">Guardar</button>
                         </div>

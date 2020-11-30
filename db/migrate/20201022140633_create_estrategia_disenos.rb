@@ -1,6 +1,6 @@
 class CreateEstrategiaDisenos < ActiveRecord::Migration[6.0]
   def change
-    create_table :etrategia_disenos do |t|
+    create_table :estrategia_disenos do |t|
       t.text :descripcion_producto
       t.string :tamano
       t.integer :ciclo, null: false, default: 1

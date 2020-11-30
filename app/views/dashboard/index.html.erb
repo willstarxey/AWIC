@@ -1,6 +1,7 @@
 <div class="container-fluid">
     <% if params[:proyecto_id].nil? %>
     <div class="row justify-content-md-center align-items-center"><h1 class="h1 text-white">BIENVENIDO AL SISTEMA <%= current_user.nombre %></h1></div>
+    <%if !@colaborador.empty? %>
 	<div class="row justify-content-md-center align-items-center"> 
         <div class="card bg-aqua mt-4">
         <div class="card-header text-white">
@@ -8,14 +9,14 @@
         </div>
         <div class="table-responsive">
         <table class="table table-hover table-dark card-body table-hover">
-        <% @proyectos.each do |proyecto|%>
+        <% @colaborador.each do |proyecto|%>
             <thead>
                 <tr>
-                <th scope="col" style="width: 3%">ID: <%=proyecto.id%></th>
-                <th scope="col" colspan="8" style="width: 97%"><%=proyecto.nombre%></th>
+                <th scope="col" style="width: 3%">ID: <%=proyecto.proyecto.id%></th>
+                <th scope="col" colspan="8" style="width: 97%"><%=proyecto.proyecto.nombre%></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="text-center">
                     <tr>
                         <th scope="col">Ciclo</th>
                         <th scope="col">Lanzamiento</th>
@@ -28,20 +29,77 @@
                         <th scope="col">Postmortem</th>
                     </tr>
                     <tr>
-                        <td>1</td>
-                        <td>Lanzamiento</td>
-                        <td>Estrategia</td>
-                        <td>Planeación</td>
-                        <td>Requerimientos</td>
-                        <td>Diseño</td>
-                        <td>Implementación</td>
-                        <td>Pruebas</td>
-                        <td>Postmortem</td>
+                        <td><%=proyecto.proyecto.ciclo_actual%></td>
+                        <td style="width: 10%">
+                            <% @lanzamiento = Lanzamiento::Meta.find_by_sql("SELECT * FROM lanzamiento_metas AS M JOIN (SELECT id FROM colaboradors WHERE proyecto_id = #{proyecto.proyecto.id}) AS C ON M.colaborador_id = C.id AND ciclo = (SELECT ciclo_actual FROM proyectos WHERE id = #{proyecto.proyecto.id})")%>
+                            <%if !@lanzamiento.empty?%>
+                                <%= image_tag("green.png", :alt=>"En Ejecución", :width => '15%' )%>
+                            <%else%>
+                                <%= image_tag("red.png", :alt=>"Sin Ejecutar", :width => '15%')%>
+                            <%end%>
+                        </td>
+                        <td style="width: 10%">
+                            <% @disenos = Estrategia::Diseno.find_by_sql("SELECT * FROM estrategia_disenos AS D JOIN (SELECT id FROM colaboradors WHERE proyecto_id = #{proyecto.proyecto.id}) AS C ON D.colaborador_id = C.id AND ciclo = (SELECT ciclo_actual FROM proyectos WHERE id = #{proyecto.proyecto.id})")%>
+                            <%if !@disenos.empty?%>
+                                <%= image_tag("green.png", :alt=>"En Ejecución", :width => '15%' )%>
+                            <%else%>
+                                <%= image_tag("red.png", :alt=>"Sin Ejecutar", :width => '15%')%>
+                            <%end%>
+                        </td>
+                        <td style="width: 10%">
+                            <% @planeacion = Planeacion::PlanCalidad.find_by_sql("SELECT * FROM planeacion_planes_calidad AS D JOIN (SELECT id FROM colaboradors WHERE proyecto_id = #{proyecto.proyecto.id}) AS C ON D.colaborador_id = C.id AND ciclo = (SELECT ciclo_actual FROM proyectos WHERE id = #{proyecto.proyecto.id})")%>
+                            <%if !@planeacion.empty?%>
+                                <%= image_tag("green.png", :alt=>"En Ejecución", :width => '15%' )%>
+                            <%else%>
+                                <%= image_tag("red.png", :alt=>"Sin Ejecutar", :width => '15%')%>
+                            <%end%>
+                        </td>
+                        <td style="width: 10%">
+                            <% @requerimientos = Requerimientos::Requerimiento.find_by_sql("SELECT * FROM requerimientos_requerimientos AS D JOIN (SELECT id FROM colaboradors WHERE proyecto_id = #{proyecto.proyecto.id}) AS C ON D.colaborador_id = C.id AND ciclo = (SELECT ciclo_actual FROM proyectos WHERE id = #{proyecto.proyecto.id})")%>
+                            <%if !@requerimientos.empty?%>
+                                <%= image_tag("green.png", :alt=>"En Ejecución", :width => '15%' )%>
+                            <%else%>
+                                <%= image_tag("red.png", :alt=>"Sin Ejecutar", :width => '15%')%>
+                            <%end%>
+                        </td>
+                        <td style="width: 10%">
+                            <% @diseno = Diseno::Estructura.find_by_sql("SELECT * FROM diseno_estructuras AS D JOIN (SELECT id FROM colaboradors WHERE proyecto_id = #{proyecto.proyecto.id}) AS C ON D.colaborador_id = C.id AND ciclo = (SELECT ciclo_actual FROM proyectos WHERE id = #{proyecto.proyecto.id})")%>
+                            <%if !@diseno.empty?%>
+                                <%= image_tag("green.png", :alt=>"En Ejecución", :width => '15%' )%>
+                            <%else%>
+                                <%= image_tag("red.png", :alt=>"Sin Ejecutar", :width => '15%')%>
+                            <%end%>
+                        </td>
+                        <td style="width: 10%">
+                            <% @implementacion = Implementacion::CriterioCalidad.find_by_sql("SELECT * FROM implementacion_criterios_calidad AS D JOIN (SELECT id FROM colaboradors WHERE proyecto_id = #{proyecto.proyecto.id}) AS C ON D.colaborador_id = C.id AND ciclo = (SELECT ciclo_actual FROM proyectos WHERE id = #{proyecto.proyecto.id})")%>
+                            <%if !@implementacion.empty?%>
+                                <%= image_tag("green.png", :alt=>"En Ejecución", :width => '15%' )%>
+                            <%else%>
+                                <%= image_tag("red.png", :alt=>"Sin Ejecutar", :width => '15%')%>
+                            <%end%>
+                        </td>
+                        <td style="width: 10%">
+                            <% @pruebas = Pruebas::Prueba.find_by_sql("SELECT * FROM pruebas_pruebas AS D JOIN (SELECT id FROM colaboradors WHERE proyecto_id = #{proyecto.proyecto.id}) AS C ON D.colaborador_id = C.id AND ciclo = (SELECT ciclo_actual FROM proyectos WHERE id = #{proyecto.proyecto.id})")%>
+                            <%if !@pruebas.empty?%>
+                                <%= image_tag("green.png", :alt=>"En Ejecución", :width => '15%' )%>
+                            <%else%>
+                                <%= image_tag("red.png", :alt=>"Sin Ejecutar", :width => '15%')%>
+                            <%end%>
+                        </td>
+                        <td style="width: 10%">
+                            <% @postmortem = Postmortem::Resumen.find_by_sql("SELECT * FROM postmortem_resumenes WHERE proyecto_id = #{proyecto.proyecto.id} AND ciclo = #{proyecto.proyecto.ciclo_actual}")%>
+                            <%if !@postmortem.empty?%>
+                                <%= image_tag("green.png", :alt=>"En Ejecución", :width => '15%' )%>
+                            <%else%>
+                                <%= image_tag("red.png", :alt=>"Sin Ejecutar", :width => '15%')%>
+                            <%end%>
+                        </td>
                     </tr>
                 <% end %>
             </tbody>
         </table>
         </div>
+        <%end%>
     </div>
     </div>
     <% end %>

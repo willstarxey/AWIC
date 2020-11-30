@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6 px-0">
-                                <form method="POST" action="/pruebas/pruebas/delete/<%=calidad.id%>&proyecto_id=<%=@proyecto.id%>" accept-charset="UTF-8" class="form-horizontal" role="form">
+                                <form method="POST" action="/pruebas/pruebas/delete/<%=prueba.id%>&proyecto_id=<%=@proyecto.id%>" accept-charset="UTF-8" class="form-horizontal" role="form">
                                 <!-- Protección CSRF -->
                                 <%= token_tag nil %>
                                 <div class="d-inline-flex">

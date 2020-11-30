@@ -9,9 +9,14 @@ class DashboardController < ApplicationController
   add_flash_types :success, :danger, :info, :warning
 
   def index
-    user = User.find_by_id(current_user.id)
-    @proyectos = Proyecto.all
-    if user.valid_password?("AWIC0000")
+    @proyectos = Proyecto.all();
+    @colaborador = nil
+    if !current_user.admin?
+      @colaborador = Colaborador.where(user_id: current_user.id, lider: true)
+    else
+      @colaborador = Colaborador.where(lider: true);
+    end
+    if User.find_by_id(current_user.id).valid_password?("AWIC0000")
       redirect_to dashboard_change_path
     end
     if params[:proyecto_id]

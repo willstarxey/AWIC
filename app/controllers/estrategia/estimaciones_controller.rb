@@ -73,6 +73,6 @@ class Estrategia::EstimacionesController < ApplicationController
 
   private
   def parametros
-    params.permit(:descripcion, :funcion, :descripcion, :tamano, :tiempo, :ciclo)
+    params.permit(:funcion, :descripcion, :tamano, :tiempo, :ciclo)
   end
 end

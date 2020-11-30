@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 2020_11_04_055915) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "colaborador_id"
-    t.bigint "diseno_tipo_id"
+    t.bigint "diseno_tipo_estandar_id"
     t.index ["colaborador_id"], name: "index_diseno_estandares_on_colaborador_id"
-    t.index ["diseno_tipo_id"], name: "index_diseno_estandares_on_diseno_tipo_id"
+    t.index ["diseno_tipo_estandar_id"], name: "index_diseno_estandares_on_diseno_tipo_estandar_id"
   end
 
   create_table "diseno_estructuras", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 2020_11_04_055915) do
     t.text "descripcion", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "proyecto_id"
+    t.index ["proyecto_id"], name: "index_diseno_tipos_estandares_on_proyecto_id"
   end
 
   create_table "estrategia_criterios", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -67,6 +69,16 @@ ActiveRecord::Schema.define(version: 2020_11_04_055915) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "colaborador_id"
     t.index ["colaborador_id"], name: "index_estrategia_criterios_on_colaborador_id"
+  end
+
+  create_table "estrategia_disenos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.text "descripcion_producto"
+    t.string "tamano"
+    t.integer "ciclo", default: 1, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "colaborador_id"
+    t.index ["colaborador_id"], name: "index_estrategia_disenos_on_colaborador_id"
   end
 
   create_table "estrategia_estimaciones", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -79,16 +91,6 @@ ActiveRecord::Schema.define(version: 2020_11_04_055915) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "colaborador_id"
     t.index ["colaborador_id"], name: "index_estrategia_estimaciones_on_colaborador_id"
-  end
-
-  create_table "etrategia_disenos", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.text "descripcion_producto"
-    t.string "tamano"
-    t.integer "ciclo", default: 1, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.bigint "colaborador_id"
-    t.index ["colaborador_id"], name: "index_etrategia_disenos_on_colaborador_id"
   end
 
   create_table "implementacion_criterios_calidad", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -124,13 +126,17 @@ ActiveRecord::Schema.define(version: 2020_11_04_055915) do
 
   create_table "postmortem_resumenes", options: "ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "ciclo", null: false
-    t.text "descripcion", null: false
-    t.json "lanzamiento", null: false
-    t.json "estrategia", null: false
-    t.json "planeacion", null: false
-    t.json "requerimientos", null: false
-    t.json "diseno", null: false
-    t.json "implementacion", null: false
+    t.text "detalles"
+    t.json "lanzamiento_metas", null: false
+    t.json "estrategia_criterios", null: false
+    t.json "estrategia_disenos", null: false
+    t.json "estrategia_estimaciones", null: false
+    t.json "planeacion_planes_calidad", null: false
+    t.json "requerimientos_requerimientos", null: false
+    t.json "diseno_estandares", null: false
+    t.json "diseno_estructuras", null: false
+    t.json "diseno_planes_pruebas", null: false
+    t.json "implementacion_criterios_calidad", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "proyecto_id"
@@ -154,12 +160,17 @@ ActiveRecord::Schema.define(version: 2020_11_04_055915) do
     t.text "r_obtenido", null: false
     t.text "r_deseado", null: false
     t.boolean "cumple", default: false, null: false
-    t.json "lanzamiento", null: false
-    t.json "estrategia", null: false
-    t.json "planeacion", null: false
-    t.json "requerimientos", null: false
-    t.json "diseno", null: false
-    t.json "implementacion", null: false
+    t.integer "ciclo", default: 1, null: false
+    t.json "lanzamiento_metas", null: false
+    t.json "estrategia_criterios", null: false
+    t.json "estrategia_disenos", null: false
+    t.json "estrategia_estimaciones", null: false
+    t.json "planeacion_planes_calidad", null: false
+    t.json "requerimientos_requerimientos", null: false
+    t.json "diseno_estandares", null: false
+    t.json "diseno_estructuras", null: false
+    t.json "diseno_planes_pruebas", null: false
+    t.json "implementacion_criterios_calidad", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "colaborador_id"

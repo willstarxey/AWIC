@@ -98,7 +98,7 @@ Rails.application.routes.draw do
       get 'resumenes/create' => 'resumenes#create'
       get 'resumenes/update' => 'resumenes#update'
       post 'resumenes/store' => 'resumenes#store'
-      post 'resumenes/edit/:id', to: 'resumenes#edit'
+      post 'resumenes/update_project/:proyecto_id', to: 'resumenes#update_ciclo_proyecto'
       post 'resumenes/delete/:id', to: 'resumenes#delete'
     end
     namespace :pruebas do

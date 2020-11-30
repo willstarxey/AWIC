@@ -10,3 +10,5 @@
 Role.create({ nombre: 'Administrador', descripcion: 'Administrador de la aplicación con respecto a usuarios y proyectos' })
 Role.create({ nombre: 'Lider', descripcion: 'Usuario que puede realizar ediciones a proyectos y repartir tareas' })
 Role.create({ nombre: 'Usuario', descripcion: 'Usuario que realiza tareas de proyectos' })
+
+User.create(nombre: 'Guillermo', app: 'Rios', apm: 'Silva', edad: '24', sexo: 'H', puesto: 'CTO', email: 'guillermo@awic.com', password: 'guillermo0000', role_id: 1)

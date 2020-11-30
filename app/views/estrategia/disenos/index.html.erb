@@ -18,8 +18,8 @@
             <% @colaboradors.each do |colab|%>
                 <% colab.estrategia_disenos.each do |diseno|%>
                     <tr>
-                    <td><%=diseno.descripcion%></td>
-                    <td><%=diseno.tamano%></td>
+                    <td><%=diseno.descripcion_producto%></td>
+                    <td><%=diseno.tamano%> LOC</td>
                     <td>
                         <div class="row justify-content-center align-items-center">
                             <div class="col-md-6 px-0">
@@ -34,7 +34,7 @@
                                 <!-- Protección CSRF -->
                                 <%= token_tag nil %>
                                 <div class="d-inline-flex">
-                                    <input type="submit" class="btn-delete" title="Eliminar" data-confirm="¿Desea eliminar el diseño <%=diseno.descripcion%>?" data-title="Eliminar Diseño" data-commit="Eliminar" data-cancel="Cancelar">
+                                    <input type="submit" class="btn-delete" title="Eliminar" data-confirm="¿Desea eliminar el diseño <%=diseno.descripcion_producto%>?" data-title="Eliminar Diseño" data-commit="Eliminar" data-cancel="Cancelar">
                                 </div>
                                 </form>
                             </div>

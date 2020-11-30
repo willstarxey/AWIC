@@ -26,17 +26,16 @@ class Implementacion::CriteriosCalidadController < ApplicationController
   def store
     #Definición e inicialización de nueva Diseno
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
-    @criterioCalidad = Implementacion::CriterioCaldidad.new(parametros)
+    @criterioCalidad = Implementacion::CriterioCalidad.new(parametros)
     @criterioCalidad.colaborador_id = @colaborador.id
     if(@criterioCalidad.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Criterio de Calidad Creado Correctamente"
-      redirect_to implementacion_criterios_calidad_estandares_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo crear el Tipo de Estandar"
-      redirect_to implementacion_criterios_calidad_index_path(:proyecto_id => params[:proyecto_id])
     end
+    redirect_to implementacion_criterios_calidad_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def edit

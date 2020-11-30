@@ -74,6 +74,6 @@ class Estrategia::DisenosController < ApplicationController
 
   private
   def parametros
-    params.permit(:descripcion_producto, :tamaño, :ciclo)
+    params.permit(:descripcion_producto, :tamano, :ciclo)
   end
 end

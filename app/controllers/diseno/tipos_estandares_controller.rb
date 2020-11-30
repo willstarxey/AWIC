@@ -8,12 +8,6 @@ class Diseno::TiposEstandaresController < ApplicationController
   def index
     begin
       @proyecto = Proyecto.find(params[:proyecto_id])
-      @colaboradors = nil
-      if current_user.role_id == 2
-        @colaboradors = Colaborador.where(proyecto_id: params[:proyecto_id])
-      else
-        @colaboradors = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id)
-      end
     rescue ActiveRecord::RecordNotFound => e
       flash[:danger] = "No se ha seleccionado el proyecto"
       redirect_to dashboard_index_path
@@ -26,18 +20,16 @@ class Diseno::TiposEstandaresController < ApplicationController
 
   def store
     #Definición e inicialización de nueva Diseno
-    @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @tipoEstandar = Diseno::TipoEstandar.new(parametros)
-    @tipoEstandar.colaborador_id = @colaborador.id
+    @tipoEstandar.proyecto_id = params[:proyecto_id]
     if(@tipoEstandar.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Tipo de Estándar Creado Correctamente"
-      redirect_to diseno_tipos_estandares_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo crear el Tipo de Estándar"
-      redirect_to diseno_tipos_estandares_index_path(:proyecto_id => params[:proyecto_id])
     end
+    redirect_to diseno_tipos_estandares_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def edit

@@ -15,8 +15,7 @@
                 </tr>
             </thead>
             <tbody>
-            <% @colaboradors.each do |colab|%>
-                <% colab.diseno_tipos_estandares.each do |tipo|%>
+            <% @proyecto.diseno_tipos_estandares.each do |tipo|%>
                     <tr>
                     <td><%=tipo.nombre%></td>
                     <td><%=tipo.descripcion%></td>
@@ -42,7 +41,6 @@
                     </td>
                     </tr>
                 <% end %>
-            <% end %>
             </tbody>
         </table>
     </div>

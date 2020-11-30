@@ -22,6 +22,13 @@ class Diseno::EstandaresController < ApplicationController
 
   def create
     @diseno = Diseno::Estandar.new
+    @tipos_estandares = nil
+    if Diseno::TipoEstandar.where(proyecto_id: params[:proyecto_id]) == nil
+      flash[:danger] = "No tiene registrado ningún tipo de estándar."
+      redirect_to diseno_estandares_index_path(:proyecto_id => params[:proyecto_id])
+    else
+      @tipo_estandares = Diseno::TipoEstandar.where(proyecto_id: params[:proyecto_id])
+    end
   end
 
   def store
@@ -32,12 +39,11 @@ class Diseno::EstandaresController < ApplicationController
     if(@estandar.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Estándar creado Correctamente"
-      redirect_to diseno_estandares_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso satisfactorio
       flash[:danger] = "No se pudo crear el estándar"
-      redirect_to diseno_estandar_index_path(:proyecto_id => params[:proyecto_id])
     end
+    redirect_to diseno_estandares_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def edit
@@ -46,12 +52,11 @@ class Diseno::EstandaresController < ApplicationController
     if @estandar.update(parametros)
       #Impresión del proceso satisfactorio
       flash[:success] = "Estándar Actualizado Correctamente"
-      redirect_to diseno_estandares_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso satisfactorio
       flash[:danger] = "Estándar no se pudo actualizar"
-      redirect_to diseno_estandares_index_path(:proyecto_id => params[:proyecto_id])
     end
+    redirect_to diseno_estandares_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def update
@@ -74,6 +79,6 @@ class Diseno::EstandaresController < ApplicationController
 
   private
   def parametros
-    params.permit( :nombre, :descripcion, :ciclo)
+    params.permit(:nombre, :descripcion, :ciclo, :diseno_tipo_estandar_id)
   end
 end

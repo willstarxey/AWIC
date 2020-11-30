@@ -126,18 +126,17 @@ class ProyectosController < ApplicationController
     @user = @proyecto.colaboradors.where(lider: 1).first.user
     if @user.colaboradors.where(lider: 1).length == 1
       update_rol(@user.id, "3")
+      Colaborador.where(proyecto_id: @proyecto.id, user_id: @user.first.id).destroy_all
       #Redireccionamiento a la visa de busqueda
       flash[:success] = "Proyecto Eliminado Correctamente"
-      redirect_to proyectos_index_path
     elsif @user.colaboradors.where(lider: 1).length > 1
       #Redireccionamiento a la visa de busqueda
       flash[:success] = "Proyecto Eliminado Correctamente"
-      redirect_to proyectos_index_path
     else
       #Redireccionamiento a la visa de busqueda
       flash[:danger] = "No se pudo eliminar el proyecto."
-      redirect_to proyectos_index_path
     end
+    redirect_to proyectos_index_path
   end
 
   private

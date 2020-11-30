@@ -4,6 +4,7 @@ class CreateDisenoTiposEstandares < ActiveRecord::Migration[6.0]
       t.string :nombre, null: false
       t.text :descripcion, null: false
       t.timestamps
+      t.belongs_to :proyecto, foreign_key: true
     end
   end
 end

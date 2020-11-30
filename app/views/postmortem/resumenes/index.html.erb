@@ -4,24 +4,35 @@
     <div class="card bg-aqua">
         <div class="row card-header text-white">
             <h3 class="col-md-10">Postmortem  : :  Resumenes</h3>
+            <%= link_to 'Generar Resumen', postmortem_resumenes_create_path(:proyecto_id => @proyecto.id), class: "btn btn-light col-md-2 float-right" %>
         </div>
         <table class="table table-hover table-sm table-dark card-body">
             <thead>
                 <tr>
                 <th scope="col">Ciclo</th>
                 <th scope="col">Descripción</th>
+                <th scope="col" style="width: 10%">Acciones</th>
                 </tr>
             </thead>
             <tbody>
-            <% @colaboradors.each do |colab|%>
-                <% colab.postmortem_resumenes.each do |resumen|%>
+            <% @proyecto.postmortem_resumenes.each do |resumen|%>
                     <tr>
                     <td><%=resumen.ciclo%></td>
-                    <td><a href="/postmortem/resumenes/show?id=<%= calidad.id %>&proyecto_id=<%=@proyecto.id%>">Ver el resumen completo del ciclo</a></td>
+                    <td><%=resumen.detalles%></td>
+                    <td><a class="text-white" href="/postmortem/resumenes/update?id=<%=resumen.id%>&proyecto_id=<%=@proyecto.id%>">Resumen Completo</a></td>
                     </tr>
-                <% end %>
             <% end %>
             </tbody>
         </table>
+        <hr class="my-1 text-white">
+        <div class="my-5 text-center">
+            <form method="POST" action="/postmortem/resumenes/update_project/<%=@proyecto.id%>" accept-charset="UTF-8" class="form-horizontal" role="form">
+            <!-- Protección CSRF -->
+            <%= token_tag nil %>
+            <div class="d-inline-flex">
+                <input value="Actualizar Ciclo del Proyecto" type="submit" class="btn btn-warning" title="Actualizar" data-confirm="¿Desea actualizar el proyecto al siguiente ciclo?" data-title="Actualizar Ciclo" data-commit="Actualizar" data-cancel="Cancelar">
+            </div>
+            </form>
+        </div>
     </div>
 </div>

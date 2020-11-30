@@ -21,7 +21,7 @@
             <div class="col-md-6 d-flex justify-content-end">
               <!-- Mensajes -->
               <% flash.each do |type, msg| %>
-                <% if type == "notice"
+                <% if type == "notice" || type == 'alert'
                       type = "info"
                     end 
                 %>

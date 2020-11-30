@@ -113,6 +113,7 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                 <%= link_to "Diseños", estrategia_disenos_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
                 <%= link_to "Criterios", estrategia_criterios_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
+                <%= link_to "Estimaciones", estrategia_estimaciones_index_path(:proyecto_id => params[:proyecto_id]), class: 'dropdown-item' %>
               </div>
             </div>
             <!--PLANEACIÓN-->
@@ -181,7 +182,7 @@
           <div class="col-md-12 d-flex justify-content-end">
             <!-- Mensajes -->
               <% flash.each do |type, msg| %>
-                <% if type == "notice"
+                <% if type == "notice" || type == "alert"
                       type = "success"
                     end 
                 %>

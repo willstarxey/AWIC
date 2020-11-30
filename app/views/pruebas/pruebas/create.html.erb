@@ -1,77 +1,264 @@
-<div class="container">
+<div class="container-fluid">
     <h2 class="h2 text-white text-center"><%=Proyecto.find(params[:proyecto_id]).nombre%></h2>
     <br>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-md-center align-items-center">
             <div class="col-md-10 align-item-center">
-            <div class="card text-center">
-                <div class="card-header">
-                    <h3>Pruebas  : :  Pruebas | Crear Prueba</h3>
-                </div>
-                <div class="card-body bg-aqua justify-content-center">
-                    <form method="POST" action="store" accept-charset="UTF-8" role="form" id="crearprueba" name="crearprueba" enctype="multipart/form-data"> 
-                        <!-- Protección CSRF -->
-                        <%= token_tag nil %>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label class="text-white">Nombre</label>
+                <div class="card text-center mb-5">
+                    <div class="card-header">
+                        <h3>Pruebas : : Pruebas | Crear Prueba</h3>
+                    </div>
+                    <div class="card-body bg-aqua justify-content-center">
+                        <form method="POST" action="store" accept-charset="UTF-8" role="form" id="crearprueba"
+                            name="crearprueba" enctype="multipart/form-data">
+                            <!-- Protección CSRF -->
+                            <%= token_tag nil %>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <input type="hidden" id="proyecto_id" name="proyecto_id"
+                                        value="<%=params[:proyecto_id]%>">
+                                    <label class="text-white">Nombre</label>
+                                </div>
+                                <div class="col-md-10 input-group form-group">
+                                    <input type="text" class="form-control" placeholder="Nombre" id="nombre"
+                                        name="nombre" required>
+                                </div>
                             </div>
-                            <div class="col-md-10 input-group form-group">
-                                <input type="text" class="form-control" placeholder="Nombre" id="nombre" name="nombre" required>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="text-white">Descripción</label>
+                                </div>
+                                <div class="col-md-10 input-group form-group">
+                                    <textarea type="text" class="form-control" placeholder="Descripción"
+                                        id="descripcion" name="descripcion" required></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label class="text-white">Descripción</label>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="text-white">Datos de Entrada</label>
+                                </div>
+                                <div class="col-md-10 input-group form-group">
+                                    <textarea type="text" class="form-control" placeholder="Datos de Entrada"
+                                        id="entrada" name="entrada" required></textarea>
+                                </div>
                             </div>
-                            <div class="col-md-10 input-group form-group">
-                                <textarea type="text" class="form-control" placeholder="Descripción" id="descripcion" name="descripcion" required></textarea>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="text-white">Resultado Obtenido</label>
+                                </div>
+                                <div class="col-md-10 input-group form-group">
+                                    <textarea type="text" class="form-control" placeholder="Resultado Obtenido"
+                                        id="r_obtenido" name="r_obtenido" required></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label class="text-white">Datos de Entrada</label>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <label class="text-white">Resultado Deseado</label>
+                                </div>
+                                <div class="col-md-10 input-group form-group">
+                                    <textarea type="text" class="form-control" placeholder="Resultado Deseado"
+                                        id="r_deseado" name="r_deseado" required></textarea>
+                                </div>
                             </div>
-                            <div class="col-md-10 input-group form-group">
-                                <textarea type="text" class="form-control" placeholder="Datos de Entrada" id="entrada" name="entrada" required></textarea>
+                            <div class="row py-4">
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="cumple">
+                                        <label class="form-check-label text-white" for="cumple">¿La prueba se cumplió
+                                            correctamente?</label>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label class="text-white">Resultado Obtenido</label>
+                            <hr class="my-1" color="#FFFFFF">
+                            <div class="row justify-content-md-center mt-5">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Lanzamiento | Metas</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <% @colaboradors.each do |colab| %>
+                                                <% colab.lanzamiento_metas.each do |meta|%>
+                                                <%= check_box_tag "lanzamiento_metas_ids[]", meta.id , false%>
+                                                <%= meta.descripcion %><br>
+                                                <%end%>
+                                                <%end%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Estrategia | Diseños</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <% @colaboradors.each do |colab| %>
+                                                <% colab.estrategia_disenos.each do |diseno|%>
+                                                <%= check_box_tag "estrategia_disenos_ids[]", diseno.id , false%>
+                                                <%= diseno.descripcion_producto %><br>
+                                                <%end%>
+                                                <%end%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Estrategia | Criterios</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <% @colaboradors.each do |colab| %>
+                                                <% colab.estrategia_criterios.each do |criterio|%>
+                                                <%= check_box_tag "estrategia_criterios_ids[]", criterio.id , false%>
+                                                <%= criterio.descripcion %><br>
+                                                <%end%>
+                                                <%end%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-10 input-group form-group">
-                                <textarea type="text" class="form-control" placeholder="Resultado Obtenido" id="r_obtenido" name="r_obtenido" required></textarea>
+                            <div class="row justify-content-md-center mt-5">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Estrategia | Estimaciones</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <% @colaboradors.each do |colab| %>
+                                                <% colab.estrategia_estimaciones.each do |estimacion|%>
+                                                <%= check_box_tag "estrategia_estimaciones_ids[]", estimacion.id , false%>
+                                                <%= estimacion.descripcion %><br>
+                                                <%end%>
+                                                <%end%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Planeación | Planes de Calidad</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <% @colaboradors.each do |colab| %>
+                                                <% colab.planeacion_planes_calidad.each do |plan_calidad|%>
+                                                <%= check_box_tag "planeacion_planes_calidad_ids[]", plan_calidad.id , false%>
+                                                <%= plan_calidad.descripcion %><br>
+                                                <%end%>
+                                                <%end%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Requerimientos | Requerimientos</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <% @colaboradors.each do |colab| %>
+                                                <% colab.requerimientos_requerimientos.each do |requerimiento|%>
+                                                <%= check_box_tag "requerimientos_requerimientos_ids[]", requerimiento.id , false%>
+                                                <%= requerimiento.descripcion %><br>
+                                                <%end%>
+                                                <%end%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label class="text-white">Resultado Deseado</label>
+                            <div class="row justify-content-md-center mt-5">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Diseño | Estructuras</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <% @colaboradors.each do |colab| %>
+                                                <% colab.diseno_estructuras.each do |estructura|%>
+                                                <%= check_box_tag "diseno_estructuras_ids[]", estructura.id , false%>
+                                                <%= estructura.descripcion %><br>
+                                                <%end%>
+                                                <%end%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Diseño | Planes de Pruebas</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <% @colaboradors.each do |colab| %>
+                                                <% colab.diseno_planes_pruebas.each do |plan_pruebas|%>
+                                                <%= check_box_tag "diseno_planes_pruebas_ids[]", plan_pruebas.id , false%>
+                                                <%= plan_pruebas.descripcion %><br>
+                                                <%end%>
+                                                <%end%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Diseño | Estándares</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <% @colaboradors.each do |colab| %>
+                                                <% colab.diseno_estandares.each do |estandar|%>
+                                                <%= check_box_tag "diseno_estandares_ids[]", estandar.id , false%>
+                                                <%= estandar.descripcion %><br>
+                                                <%end%>
+                                                <%end%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-10 input-group form-group">
-                                <textarea type="text" class="form-control" placeholder="Resultado Deseado" id="r_deseado" name="r_deseado" required></textarea>
+                            <div class="row justify-content-md-center mt-5">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Implementación | Criterios de Calidad</h5>
+                                        </div>
+                                        <div class="card-body">
+                                            <div>
+                                                <% @colaboradors.each do |colab| %>
+                                                <% colab.implementacion_criterios_calidad.each do |criterio_calidad|%>
+                                                <%= check_box_tag "implementacion_criterios_calidad_ids[]", criterio_calidad.id , false%>
+                                                <%= criterio_calidad.descripcion %><br>
+                                                <%end%>
+                                                <%end%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <label class="text-white">Resultado Deseado</label>
+                            <div class="form-group d-inline-flex mt-3">
+                                <button type="submit" class="btn btn-light">Guardar</button>
                             </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="cumple">
-                                <label class="form-check-label" for="cumple">¿La prueba se cumplió correctamente?</label>
+                            <div class="form-group d-inline-flex mt-3">
+                                <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
                             </div>
-                        </div>
-                        <div class="form-group d-inline-flex mt-3">
-                            <button type="submit" class="btn btn-light">Guardar</button>
-                        </div>
-                        <div class="form-group d-inline-flex mt-3">
-                            <%= link_to 'Cancelar', url_for(:back), class: "btn btn-warning" %>
-                        </div>
-                    </form>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
     </div>
+</div>
 </div>

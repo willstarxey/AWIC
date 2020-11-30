@@ -1,3 +1,3 @@
 class Postmortem::Resumen < ApplicationRecord
-    belongs_to :colaborador, class_name: 'Colaborador'
+    belongs_to :proyecto
 end

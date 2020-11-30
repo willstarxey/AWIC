@@ -26,10 +26,8 @@
 
 .bg-image-main {
     background-image: url('background.jpg');
-    height:100%;
-    width: 100%;
-    position: fixed;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 .bg-grey-alt {
