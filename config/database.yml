@@ -13,9 +13,9 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: id15552162_admin
-  password: '@Pitbull6366'
-  host: https://databases.000webhost.com
+  username: 3670704_awic
+  password: '2,!3Z[BI1Dl7+5%z'
+  host: fdb29.awardspace.net
   port: 3306
 
 #development:
