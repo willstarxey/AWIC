@@ -14,7 +14,7 @@ default: &default
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: 3670704_awic
-  password: '2,!3Z[BI1Dl7+5%z'
+  password: 2,!3Z[BI1Dl7+5%z
   host: fdb29.awardspace.net
   port: 3306
 
