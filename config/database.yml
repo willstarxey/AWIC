@@ -13,10 +13,10 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: 3670704_awic
-  password: 2,!3Z[BI1Dl7+5%z
-  host: fdb29.awardspace.net
-  port: 3306
+  username: admin_awic
+  password: +j@CnWW28tW97PnO
+  host: mysql-16251-0.cloudclusters.net
+  port: 16256
 
 #development:
 #  <<: *default
@@ -56,4 +56,4 @@ default: &default
 
 production:
   <<: *default
-  database: id15552162_awic
+  database: awic
