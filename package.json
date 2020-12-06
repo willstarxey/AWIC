@@ -10,11 +10,20 @@
     "data-confirm-modal": "^1.6.2",
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
+    "serve": "^11.3.2",
     "toastr": "^2.1.4",
     "turbolinks": "^5.2.0"
   },
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3.11.0"
+  },
+  "scripts": {
+    "dev": "react-scripts start",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   }
 }
