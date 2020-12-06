@@ -25,9 +25,9 @@
 }
 
 .bg-image-main {
-    background-image: url('background.jpg');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-image: url('background.jpg') !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
 }
 
 .bg-grey-alt {
