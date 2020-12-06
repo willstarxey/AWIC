@@ -57,3 +57,4 @@ test:
 production:
   <<: *default
   database: awic_production
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>

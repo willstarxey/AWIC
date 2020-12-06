@@ -46,6 +46,11 @@ group :test do
   gem 'webdrivers'
 end
 
+group :production do
+  # Use mysql as the database for Active Record
+  gem 'mysql2', '>= 0.4.4'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
