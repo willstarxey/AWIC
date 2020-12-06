@@ -2,7 +2,7 @@ class ErrorsController < ApplicationController
 
   layout 'application'
 
-  skip_before_action :authenticate_user!
+  #skip_before_action :authenticate_user!
 
   def not_found
     status_code = params[:code] || 404
