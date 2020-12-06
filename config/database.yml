@@ -18,16 +18,16 @@ default: &default
   host: mysql-16251-0.cloudclusters.net
   port: 16256
 
-#development:
-#  <<: *default
-#  database: id15552162_admin_development
+development:
+  <<: *default
+  database: awic_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-#test:
-#  <<: *default
-#  database: id15552162_admin_test
+test:
+  <<: *default
+  database: awic_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -56,4 +56,4 @@ default: &default
 
 production:
   <<: *default
-  database: awic
+  database: awic_production
