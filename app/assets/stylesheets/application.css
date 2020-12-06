@@ -25,7 +25,7 @@
 }
 
 .bg-image-main {
-    background-image: url('images/background.jpg');
+    background-image: url('background.jpg');
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
