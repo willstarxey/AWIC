@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     get 'proyectos/index'
     get 'proyectos/create' => 'proyectos#create'
     get 'proyectos/search'
+    get 'proyectos/show_ended'
     get 'proyectos/update' => 'proyectos#update'
     post 'proyectos/store' => 'proyectos#store'
     post 'proyectos/edit/:id', to: 'proyectos#edit'

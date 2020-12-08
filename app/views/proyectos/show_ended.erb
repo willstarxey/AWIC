@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="card bg-aqua">
+        <div class="row card-header text-white">
+            <h3 class="col-md-10">Proyectos Concluidos</h3>
+        </div>
+        <table class="table table-hover table-sm table-dark card-body">
+            <thead>
+                <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% @proyectos.each do |proyecto|%>
+                    <tr>
+                    <td><%=proyecto.id%></td>
+                    <td><%=proyecto.nombre%></td>
+                    </tr>
+            <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

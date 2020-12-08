@@ -48,6 +48,10 @@ class ProyectosController < ApplicationController
     @proyecto
   end
 
+  def show_ended
+    @proyectos = Proyecto.where(finalizado: true)
+  end
+
   #Edición del Proyecto con respecto a la vista del Administrador
   def edit
     @proyecto = Proyecto.find(params[:id])
