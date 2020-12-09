@@ -12,9 +12,9 @@ class DashboardController < ApplicationController
     @proyectos = Proyecto.all();
     @colaborador = nil
     if !current_user.admin?
-      @colaborador = Colaborador.where(user_id: current_user.id, lider: true)
+      @colaborador = Colaborador.where(user_id: current_user.id, lider: true, finalizado: false)
     else
-      @colaborador = Colaborador.where(lider: true);
+      @colaborador = Colaborador.where(lider: true, finalizado: false);
     end
     if User.find_by_id(current_user.id).valid_password?("AWIC0000")
       redirect_to dashboard_change_path

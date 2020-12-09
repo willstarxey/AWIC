@@ -83,6 +83,18 @@ class Postmortem::ResumenesController < ApplicationController
     redirect_to postmortem_resumenes_index_path(:proyecto_id => params[:proyecto_id])
   end
 
+  def end_proyecto
+    @proyecto = Proyecto.find(params[:proyecto_id])
+    @proyecto = Proyecto.where(id: @proyecto).first
+    @ciclo_final = @proyecto.n_ciclos
+    if @proyecto.update(ciclo_actual: @ciclo_final, finalizado: true)
+      flash[:success] = "Proyecto Finalizado"
+    else
+      flash[:danger] = "No Se Pudo Finalizar el Proyecto"
+    end
+    redirect_to postmortem_resumenes_index_path(:proyecto_id => params[:proyecto_id])
+  end
+
   #Método para matchear todos los procesos incluidos en las pruebas
   private
   def match_pruebas(proyecto_id, ciclo)

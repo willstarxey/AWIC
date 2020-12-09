@@ -33,6 +33,13 @@
                 <input value="Actualizar Ciclo del Proyecto" type="submit" class="btn btn-warning" title="Actualizar" data-confirm="¿Desea actualizar el proyecto al siguiente ciclo?" data-title="Actualizar Ciclo" data-commit="Actualizar" data-cancel="Cancelar">
             </div>
             </form>
+            <form method="POST" action="/postmortem/resumenes/end_project/<%=@proyecto.id%>" accept-charset="UTF-8" class="form-horizontal" role="form">
+            <!-- Protección CSRF -->
+            <%= token_tag nil %>
+            <div class="d-inline-flex">
+                <input value="Finalizar Proyecto" type="submit" class="btn btn-warning" title="Finalizar" data-confirm="¿Desea realmente finalizar el proyecto?" data-title="Finalizar Proyecto" data-commit="Finalizar" data-cancel="Cancelar">
+            </div>
+            </form>
         </div>
     </div>
 </div>
