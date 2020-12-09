@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
   add_flash_types :success, :danger, :info, :warning
 
   def index
-    @proyectos = Proyecto.where(finalizado: false);
+    @proyectos = Proyecto.where(finalizado: 0);
     @colaborador = nil
     if !current_user.admin?
       @colaborador = Colaborador.where(user_id: current_user.id, lider: true)
