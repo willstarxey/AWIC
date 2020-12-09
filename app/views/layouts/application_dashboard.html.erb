@@ -65,7 +65,7 @@
                     <% c_user = current_user.colaboradors.where(lider: true)
                       if !c_user.empty? %>
                       <% c_user.each do |proyecto| %>
-                        <% if proyecto.finalizado = 0%>
+                        <% if proyecto.finalizado == 0%>
                           <%= link_to proyecto.proyecto.nombre, dashboard_index_path(:proyecto_id => proyecto.proyecto.id), class: 'dropdown-item' %>
                         <% end %>
                       <% end %>
@@ -82,7 +82,7 @@
                     <% c_user = current_user.colaboradors.where(lider: false)
                       if !c_user.empty? %>
                       <% c_user.each do |proyecto| %>
-                        <% if proyecto.finalizado = 0%>
+                        <% if proyecto.finalizado == 0%>
                           <%= link_to proyecto.proyecto.nombre, dashboard_index_path(:proyecto_id => proyecto.proyecto.id), class: 'dropdown-item' %>
                         <% end %>
                       <% end %>
