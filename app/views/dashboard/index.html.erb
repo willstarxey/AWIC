@@ -12,7 +12,7 @@
             <div class="table-responsive">
                 <table class="table table-hover table-dark card-body table-hover">
                     <% @colaborador.each do |proyecto|%>
-                    <% if proyecto.proyecto.finalizado == 0 %>
+                    <% if proyecto.proyecto.finalizado == false %>
                     <thead>
                         <tr>
                             <th scope="col" style="width: 3%">ID: <%=proyecto.proyecto.id%></th>
