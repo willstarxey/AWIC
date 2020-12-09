@@ -30,6 +30,7 @@
                             <th scope="col">Pruebas</th>
                             <th scope="col">Postmortem</th>
                         </tr>
+                        <% if proyecto.proyecto.finalizado == 0 %>
                         <tr>
                             <td><%=proyecto.proyecto.ciclo_actual%></td>
                             <td style="width: 10%">
@@ -97,6 +98,7 @@
                                 <%end%>
                             </td>
                         </tr>
+                        <% end %>
                         <% end %>
                     </tbody>
                 </table>
