@@ -19,6 +19,7 @@
                         </tr>
                     </thead>
                     <tbody class="text-center">
+                        <% if proyecto.proyecto.finalizado == 0 %>
                         <tr>
                             <th scope="col">Ciclo</th>
                             <th scope="col">Lanzamiento</th>
@@ -30,7 +31,6 @@
                             <th scope="col">Pruebas</th>
                             <th scope="col">Postmortem</th>
                         </tr>
-                        <% if proyecto.proyecto.finalizado == 0 %>
                         <tr>
                             <td><%=proyecto.proyecto.ciclo_actual%></td>
                             <td style="width: 10%">
