@@ -24,17 +24,23 @@ class Pruebas::PruebasController < ApplicationController
     #Definición e inicialización de nueva Prueba
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @prueba = Pruebas::Prueba.new(parametros)
+    #obteniendo el ciclo del proyecto
+    @prueba.ciclo = Proyecto.find(params[:proyecto_id]).ciclo_actual
     @prueba.colaborador_id = @colaborador.id
-    @prueba.lanzamiento_metas = Lanzamiento::Meta.find(params[:lanzamiento_metas_ids]).to_json
-    @prueba.estrategia_disenos = Estrategia::Diseno.find(params[:estrategia_disenos_ids]).to_json
-    @prueba.estrategia_criterios = Estrategia::Criterio.find(params[:estrategia_criterios_ids]).to_json
-    @prueba.estrategia_estimaciones = Estrategia::Estimacion.find(params[:estrategia_estimaciones_ids]).to_json
-    @prueba.planeacion_planes_calidad = Planeacion::PlanCalidad.find(params[:planeacion_planes_calidad_ids]).to_json
-    @prueba.requerimientos = Requerimientos::Requerimiento.find(params[:requerimientos_requerimientos_ids]).to_json
-    @prueba.diseno_estructuras = Diseno::Estructura.find(params[:diseno_estructuras_ids]).to_json
-    @prueba.diseno_planes_pruebas = Diseno::PlanPruebas.find(params[:diseno_planes_pruebas_ids]).to_json
-    #@prueba.diseno_estandares = Diseno::Estandar.find(params[:diseno_estandares_ids]).to_json
-    @prueba.implementacion_criterios_calidad = Implementacion::CriterioCalidad.find(params[:implementacion_criterios_calidad_ids]).to_json
+    begin
+      @prueba.lanzamiento_metas = Lanzamiento::Meta.find(params[:lanzamiento_metas_ids]).to_json
+      @prueba.estrategia_disenos = Estrategia::Diseno.find(params[:estrategia_disenos_ids]).to_json
+      @prueba.estrategia_criterios = Estrategia::Criterio.find(params[:estrategia_criterios_ids]).to_json
+      @prueba.estrategia_estimaciones = Estrategia::Estimacion.find(params[:estrategia_estimaciones_ids]).to_json
+      @prueba.planeacion_planes_calidad = Planeacion::PlanCalidad.find(params[:planeacion_planes_calidad_ids]).to_json
+      @prueba.requerimientos = Requerimientos::Requerimiento.find(params[:requerimientos_requerimientos_ids]).to_json
+      @prueba.diseno_estructuras = Diseno::Estructura.find(params[:diseno_estructuras_ids]).to_json
+      @prueba.diseno_planes_pruebas = Diseno::PlanPruebas.find(params[:diseno_planes_pruebas_ids]).to_json
+      @prueba.diseno_estandares = Diseno::Estandar.find(params[:diseno_estandares_ids]).to_json
+      @prueba.implementacion_criterios_calidad = Implementacion::CriterioCalidad.find(params[:implementacion_criterios_calidad_ids]).to_json
+    rescue ActiveRecord::RecordNotFound => e
+      
+    end
     if(@prueba.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Prueba Creada Correctamente"

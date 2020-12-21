@@ -27,16 +27,17 @@ class Diseno::EstructurasController < ApplicationController
     #Definición e inicialización de nueva Diseno
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @estructura = Diseno::Estructura.new(parametros)
+    #obteniendo el ciclo del proyecto
+    @estructura.ciclo = Proyecto.find(params[:proyecto_id]).ciclo_actual
     @estructura.colaborador_id = @colaborador.id
     if(@estructura.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Estructura Creada Correctamente"
-      redirect_to diseno_estructuras_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso satisfactorio
       flash[:danger] = "No se pudo crear la estructura"
-      redirect_to diseno_estructuras_index_path(:proyecto_id => params[:proyecto_id])
     end
+    redirect_to diseno_estructuras_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def edit
@@ -45,12 +46,11 @@ class Diseno::EstructurasController < ApplicationController
     if @estructura.update(parametros)
       #Impresión del proceso satisfactorio
       flash[:success] = "Estructura Actualizado Correctamente"
-      redirect_to diseno_estructuras_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso satisfactorio
       flash[:danger] = "La estructura no se pudo actualizar"
-      redirect_to diseno_estructuras_index_path(:proyecto_id => params[:proyecto_id])
     end
+    redirect_to diseno_estructuras_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def update

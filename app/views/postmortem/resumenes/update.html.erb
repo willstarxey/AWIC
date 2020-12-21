@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container-fluid">
     <h2 class="h2 text-white text-center"><%=Proyecto.find(params[:proyecto_id]).nombre%></h2>
     <br>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-md-center align-items-center">
             <div class="col-md-10 align-item-center">
                 <div class="card text-center mb-5">
@@ -31,14 +31,14 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Lanzamiento | Metas</h5>
+                                            <h6>Lanzamiento | Metas</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="p-0 m-0">
                                                 <% resumen.lanzamiento_metas.each do |meta|%>
                                                 <div class="row justify-content-center align-items-center">
-                                                    [<div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                                    </div>]
+                                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                                    </div>
                                                     <p class="pt-3">&nbsp;<%=meta['descripcion']%></p>
                                                 </div>
                                                 <%end%>
@@ -49,14 +49,14 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Estrategia | Diseños</h5>
+                                            <h6>Estrategia | Diseños</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="p-0 m-0">
                                                 <% resumen.estrategia_disenos.each do |diseno|%>
                                                 <div class="row justify-content-center align-items-center">
-                                                    [<div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                                    </div>]
+                                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                                    </div>
                                                     <p class="pt-3">&nbsp;<%=diseno['descripcion']%></p>
                                                 </div>
                                                 <%end%>
@@ -67,14 +67,14 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Estrategia | Criterios</h5>
+                                            <h6>Estrategia | Criterios</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="p-0 m-0">
                                                 <% resumen.estrategia_criterios.each do |criterio|%>
                                                 <div class="row justify-content-center align-items-center">
-                                                    [<div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                                    </div>]
+                                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                                    </div>
                                                     <p class="pt-3">&nbsp;<%=criterio['descripcion']%></p>
                                                 </div>
                                                 <%end%>
@@ -87,14 +87,14 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Estrategia | Estimaciones</h5>
+                                            <h6>Estrategia | Estimaciones</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="p-0 m-0">
                                                 <% resumen.estrategia_estimaciones.each do |estimacion|%>
                                                 <div class="row justify-content-center align-items-center">
-                                                    [<div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                                    </div>]
+                                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                                    </div>
                                                     <p class="pt-3">&nbsp;<%=estimacion['descripcion']%></p>
                                                 </div>
                                                 <%end%>
@@ -105,14 +105,14 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Planeación | Planes de Calidad</h5>
+                                            <h6>Planeación | Planes de Calidad</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="p-0 m-0">
                                                 <% resumen.planeacion_planes_calidad.each do |plan_calidad|%>
                                                 <div class="row justify-content-center align-items-center">
-                                                    [<div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                                    </div>]
+                                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                                    </div>
                                                     <p class="pt-3">&nbsp;<%=plan_calidad['descripcion']%></p>
                                                 </div>
                                                 <%end%>
@@ -123,14 +123,14 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Requerimientos | Requerimientos</h5>
+                                            <h6>Requerimientos | Requerimientos</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="p-0 m-0">
                                                 <% resumen.requerimientos_requerimientos.each do |requerimiento|%>
                                                 <div class="row justify-content-center align-items-center">
-                                                    [<div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                                    </div>]
+                                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                                    </div>
                                                     <p class="pt-3">&nbsp;<%=requerimiento['descripcion']%></p>
                                                 </div>
                                                 <%end%>
@@ -139,18 +139,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row justify-content-md-center mt-5">
+                            <div class="row justify-content-md-center mt-3">
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Diseño | Estructuras</h5>
+                                            <h6>Diseño | Estructuras</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="p-0 m-0">
                                                 <% resumen.diseno_estructuras.each do |estructura|%>
                                                 <div class="row justify-content-center align-items-center">
-                                                    [<div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                                    </div>]
+                                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                                    </div>
                                                     <p class="pt-3">&nbsp;<%=estructura['descripcion']%></p>
                                                 </div>
                                                 <%end%>
@@ -161,14 +161,14 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Diseño | Planes de Pruebas</h5>
+                                            <h6>Diseño | Planes de Pruebas</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="p-0 m-0">
                                                 <% resumen.diseno_planes_pruebas.each do |plan_pruebas|%>
                                                 <div class="row justify-content-center align-items-center">
-                                                    [<div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                                    </div>]
+                                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                                    </div>
                                                     <p class="pt-3">&nbsp;<%=plan_pruebas['descripcion']%></p>
                                                 </div>
                                                 <%end%>
@@ -179,14 +179,14 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Diseño | Estándares</h5>
+                                            <h6>Diseño | Estándares</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="p-0 m-0">
                                                 <% resumen.diseno_estandares.each do |estandar|%>
                                                 <div class="row justify-content-center align-items-center">
-                                                    [<div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                                    </div>]
+                                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                                    </div>
                                                     <p class="pt-3">&nbsp;<%=estandar['descripcion']%></p>
                                                 </div>
                                                 <%end%>
@@ -199,14 +199,14 @@
                                 <div class="col-md-4">
                                     <div class="card">
                                         <div class="card-header">
-                                            <h5>Implementación | Criterios de Calidad</h5>
+                                            <h6>Implementación | Criterios de Calidad</h6>
                                         </div>
                                         <div class="card-body">
                                             <div class="p-0 m-0">
                                                 <% resumen.implementacion_criterios_calidad.each do |criterio_calidad|%>
                                                 <div class="row justify-content-center align-items-center">
-                                                    [<div class="spinner-grow spinner-grow-sm text-danger" role="status">
-                                                    </div>]
+                                                    <div class="spinner-grow spinner-grow-sm text-danger" role="status">
+                                                    </div>
                                                     <p class="pt-3">&nbsp;<%=criterio_calidad['descripcion']%></p>
                                                 </div>
                                                 <%end%>

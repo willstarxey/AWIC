@@ -35,6 +35,8 @@ class Diseno::EstandaresController < ApplicationController
     #Definición e inicialización de nueva Diseno
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @estandar = Diseno::Estandar.new(parametros)
+    #obteniendo el ciclo del proyecto
+    @estandar.ciclo = Proyecto.find(params[:proyecto_id]).ciclo_actual
     @estandar.colaborador_id = @colaborador.id
     if(@estandar.save)
       #Impresión del proceso satisfactorio

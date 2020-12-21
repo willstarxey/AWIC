@@ -28,16 +28,17 @@ class Estrategia::CriteriosController < ApplicationController
     #Definición e inicialización de nueva Criterio
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @criterio = Estrategia::Criterio.new(parametros)
+    #obteniendo el ciclo del proyecto
+    @criterio.ciclo = Proyecto.find(params[:proyecto_id]).ciclo_actual
     @criterio.colaborador_id = @colaborador.id
     if(@criterio.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Criterio Creado Correctamente"
-      redirect_to estrategia_criterios_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo crear el Criterio"
-      redirect_to estrategia_criterios_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to estrategia_criterios_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def edit
@@ -46,12 +47,11 @@ class Estrategia::CriteriosController < ApplicationController
     if @criterio.update(parametros)
       #Impresión del proceso satisfactorio
       flash[:success] = "Criterio Actualizado Correctamente"
-      redirect_to estrategia_criterios_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo actualizar el Criterio"
-      redirect_to estrategia_criterios_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to estrategia_criterios_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def update

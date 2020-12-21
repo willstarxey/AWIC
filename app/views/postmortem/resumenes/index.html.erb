@@ -9,6 +9,7 @@
         <table class="table table-hover table-sm table-dark card-body">
             <thead>
                 <tr>
+                <th scope="col">ID</th>
                 <th scope="col">Ciclo</th>
                 <th scope="col">Descripción</th>
                 <th scope="col" style="width: 10%">Acciones</th>
@@ -17,6 +18,7 @@
             <tbody>
             <% @proyecto.postmortem_resumenes.each do |resumen|%>
                     <tr>
+                    <td><%=resumen.id%></td>
                     <td><%=resumen.ciclo%></td>
                     <td><%=resumen.detalles%></td>
                     <td><a class="text-white" href="/postmortem/resumenes/update?id=<%=resumen.id%>&proyecto_id=<%=@proyecto.id%>">Resumen Completo</a></td>
@@ -25,19 +27,19 @@
             </tbody>
         </table>
         <hr class="my-1 text-white">
-        <div class="my-5 text-center">
+        <div class="my-3 text-center">
             <form method="POST" action="/postmortem/resumenes/update_project/<%=@proyecto.id%>" accept-charset="UTF-8" class="form-horizontal" role="form">
             <!-- Protección CSRF -->
             <%= token_tag nil %>
             <div class="d-inline-flex">
-                <input value="Actualizar Ciclo del Proyecto" type="submit" class="btn btn-warning" title="Actualizar" data-confirm="¿Desea actualizar el proyecto al siguiente ciclo?" data-title="Actualizar Ciclo" data-commit="Actualizar" data-cancel="Cancelar">
+                <input value="Actualizar Ciclo del Proyecto" type="submit" class="btn btn-light" title="Actualizar" data-confirm="¿Desea actualizar el proyecto al siguiente ciclo?" data-title="Actualizar Ciclo" data-commit="Actualizar" data-cancel="Cancelar">
             </div>
             </form>
             <form method="POST" action="/postmortem/resumenes/end_project/<%=@proyecto.id%>" accept-charset="UTF-8" class="form-horizontal" role="form">
             <!-- Protección CSRF -->
             <%= token_tag nil %>
-            <div class="d-inline-flex">
-                <input value="Finalizar Proyecto" type="submit" class="btn btn-warning" title="Finalizar" data-confirm="¿Desea realmente finalizar el proyecto?" data-title="Finalizar Proyecto" data-commit="Finalizar" data-cancel="Cancelar">
+            <div class="d-inline-flex pt-3">
+                <input value="Finalizar Proyecto" type="submit" class="btn btn-danger" title="Finalizar" data-confirm="¿Desea realmente finalizar el proyecto?" data-title="Finalizar Proyecto" data-commit="Finalizar" data-cancel="Cancelar">
             </div>
             </form>
         </div>

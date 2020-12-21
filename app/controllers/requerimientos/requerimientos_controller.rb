@@ -28,16 +28,17 @@ class Requerimientos::RequerimientosController < ApplicationController
     #Definición e inicialización de nueva Requerimientos
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @requerimiento = Requerimientos::Requerimiento.new(parametros)
+    #obteniendo el ciclo del proyecto
+    @requerimiento.ciclo = Proyecto.find(params[:proyecto_id]).ciclo_actual
     @requerimiento.colaborador_id = @colaborador.id
     if(@requerimiento.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Requerimiento Creado Correctamente"
-      redirect_to requerimientos_requerimientos_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo crear el Requerimiento"
-      redirect_to requerimientos_requerimientos_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to requerimientos_requerimientos_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def edit
@@ -46,12 +47,11 @@ class Requerimientos::RequerimientosController < ApplicationController
     if @requerimiento.update(parametros)
       #Impresión del proceso satisfactorio
       flash[:success] = "Requerimiento Actualizado Correctamente"
-      redirect_to requerimientos_requerimientos_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "Requerimiento actualiza la estimación"
-      redirect_to requerimientos_requerimientos_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to requerimientos_requerimientos_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def update

@@ -28,16 +28,17 @@ class Diseno::PlanesPruebasController < ApplicationController
     #Definición e inicialización de nueva Diseno
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @planPruebas = Diseno::PlanPruebas.new(parametros)
+    #obteniendo el ciclo del proyecto
+    @planPruebas.ciclo = Proyecto.find(params[:proyecto_id]).ciclo_actual
     @planPruebas.colaborador_id = @colaborador.id
     if(@planPruebas.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Plan de pruebas Creado Correctamente"
-      redirect_to diseno_planes_pruebas_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso satisfactorio
       flash[:danger] = "No se pudo crear la Plan de pruebas"
-      redirect_to diseno_planes_pruebas_index_path(:proyecto_id => params[:proyecto_id])
     end
+    redirect_to diseno_planes_pruebas_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def edit
@@ -46,12 +47,11 @@ class Diseno::PlanesPruebasController < ApplicationController
     if @planPruebas.update(parametros)
       #Impresión del proceso satisfactorio
       flash[:success] = "Plan de Pruebas Actualizado Correctamente"
-      redirect_to diseno_planes_pruebas_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso satisfactorio
       flash[:danger] = "Plan de pruebas actualiza la estimación"
-      redirect_to diseno_planes_pruebas_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to diseno_planes_pruebas_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def update

@@ -28,16 +28,17 @@ class Planeacion::PlanesCalidadController < ApplicationController
     #Definición e inicialización de nueva PlanCalidad
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @planCalidad = Planeacion::PlanCalidad.new(parametros)
+    #obteniendo el ciclo del proyecto
+    @planCalidad.ciclo = Proyecto.find(params[:proyecto_id]).ciclo_actual
     @planCalidad.colaborador_id = @colaborador.id
     if(@planCalidad.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Plan de Calidad Creado Correctamente"
-      redirect_to planeacion_planes_calidad_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo crear el plan de calidad"
-      redirect_to planeacion_planes_calidad_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to planeacion_planes_calidad_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def edit
@@ -46,12 +47,11 @@ class Planeacion::PlanesCalidadController < ApplicationController
     if @planCalidad.update(parametros)
       #Impresión del proceso satisfactorio
       flash[:success] = "Plan de Calidad Actualizado Correctamente"
-      redirect_to planeacion_planes_calidad_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso satisfactorio
       flash[:danger] = "No se pudo actualizar el plan de calidad"
-      redirect_to planeacion_planes_alidad_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to planeacion_planes_alidad_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def update

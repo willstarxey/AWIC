@@ -27,6 +27,8 @@ class Implementacion::CriteriosCalidadController < ApplicationController
     #Definición e inicialización de nueva Diseno
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @criterioCalidad = Implementacion::CriterioCalidad.new(parametros)
+    #obteniendo el ciclo del proyecto
+    @criterioCalidad.ciclo = Proyecto.find(params[:proyecto_id]).ciclo_actual
     @criterioCalidad.colaborador_id = @colaborador.id
     if(@criterioCalidad.save)
       #Impresión del proceso satisfactorio
@@ -44,12 +46,11 @@ class Implementacion::CriteriosCalidadController < ApplicationController
     if @criterioCalidad.update(parametros)
       #Impresión del proceso satisfactorio
       flash[:success] = "Criterio de Calidad Actualizado Correctamente"
-      redirect_to implementacion_criterios_calidad_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo actualizar el Criterio de Calidad"
-      redirect_to implementacion_criterios_calidad_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to implementacion_criterios_calidad_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def update

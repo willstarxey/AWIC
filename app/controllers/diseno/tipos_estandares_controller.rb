@@ -38,12 +38,11 @@ class Diseno::TiposEstandaresController < ApplicationController
     if @tipoEstandar.update(parametros)
       #Impresión del proceso satisfactorio
       flash[:success] = "Tipo de Estándar Actualizado Correctamente"
-      redirect_to diseno_tipos_estandares_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "El Estándar No Se Actualizó"
-      redirect_to diseno_tipos_estandares_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to diseno_tipos_estandares_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def update

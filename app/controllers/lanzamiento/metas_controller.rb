@@ -28,16 +28,17 @@ class Lanzamiento::MetasController < ApplicationController
     #Definición e inicialización de nueva meta
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @meta = Lanzamiento::Meta.new(parametros)
+    #obteniendo el ciclo del proyecto
+    @meta.ciclo = Proyecto.find(params[:proyecto_id]).ciclo_actual
     @meta.colaborador_id = @colaborador.id
     if(@meta.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Meta Creada Correctamente"
-      redirect_to lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo crear la meta"
-      redirect_to lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id])
     end
+    redirect_to lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def edit
@@ -46,12 +47,11 @@ class Lanzamiento::MetasController < ApplicationController
     if @meta.update(parametros)
       #Impresión del proceso satisfactorio
       flash[:success] = "Meta Actualizada Correctamente"
-      redirect_to lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo actualizar la meta"
-      redirect_to lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id])
     end
+    redirect_to lanzamiento_metas_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def update

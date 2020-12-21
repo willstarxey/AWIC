@@ -28,16 +28,17 @@ class Estrategia::DisenosController < ApplicationController
     #Definición e inicialización de nueva Diseno
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @diseno = Estrategia::Diseno.new(parametros)
+    #obteniendo el ciclo del proyecto
+    @diseno.ciclo = Proyecto.find(params[:proyecto_id]).ciclo_actual
     @diseno.colaborador_id = @colaborador.id
     if(@diseno.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Diseño Creado Correctamente"
-      redirect_to estrategia_disenos_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo crear el Diseño"
-      redirect_to estrategia_disenos_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to estrategia_disenos_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def edit
@@ -46,12 +47,11 @@ class Estrategia::DisenosController < ApplicationController
     if @diseno.update(parametros)
       #Impresión del proceso satisfactorio
       flash[:success] = "Diseño Actualizado Correctamente"
-      redirect_to estrategia_disenos_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo actualizar el Diseño"
-      redirect_to estrategia_disenos_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to estrategia_disenos_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def update

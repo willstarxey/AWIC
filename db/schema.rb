@@ -155,22 +155,22 @@ ActiveRecord::Schema.define(version: 2020_11_04_055915) do
 
   create_table "pruebas_pruebas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nombre", null: false
-    t.text "descripcion", null: false
-    t.text "entrada", null: false
-    t.text "r_obtenido", null: false
-    t.text "r_deseado", null: false
+    t.text "descripcion"
+    t.text "entrada"
+    t.text "r_obtenido"
+    t.text "r_deseado"
     t.boolean "cumple", default: false, null: false
     t.integer "ciclo", default: 1, null: false
-    t.json "lanzamiento_metas", null: false
-    t.json "estrategia_criterios", null: false
-    t.json "estrategia_disenos", null: false
-    t.json "estrategia_estimaciones", null: false
-    t.json "planeacion_planes_calidad", null: false
-    t.json "requerimientos_requerimientos", null: false
-    t.json "diseno_estandares", null: false
-    t.json "diseno_estructuras", null: false
-    t.json "diseno_planes_pruebas", null: false
-    t.json "implementacion_criterios_calidad", null: false
+    t.json "lanzamiento_metas"
+    t.json "estrategia_criterios"
+    t.json "estrategia_disenos"
+    t.json "estrategia_estimaciones"
+    t.json "planeacion_planes_calidad"
+    t.json "requerimientos_requerimientos"
+    t.json "diseno_estandares"
+    t.json "diseno_estructuras"
+    t.json "diseno_planes_pruebas"
+    t.json "implementacion_criterios_calidad"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "colaborador_id"

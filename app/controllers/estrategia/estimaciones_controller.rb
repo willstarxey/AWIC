@@ -27,16 +27,17 @@ class Estrategia::EstimacionesController < ApplicationController
     #Definición e inicialización de nueva Estimacion
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @estimacion = Estrategia::Estimacion.new(parametros)
+    #obteniendo el ciclo del proyecto
+    @estimacion.ciclo = Proyecto.find(params[:proyecto_id]).ciclo_actual
     @estimacion.colaborador_id = @colaborador.id
     if(@estimacion.save)
       #Impresión del proceso satisfactorio
       flash[:success] = "Estimación Creada Correctamente"
-      redirect_to estrategia_estimaciones_index_path(:proyecto_id => params[:proyecto_id])
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo crear la Estimación"
-      redirect_to estrategia_estimaciones_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to estrategia_estimaciones_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def edit
@@ -44,13 +45,12 @@ class Estrategia::EstimacionesController < ApplicationController
     @estimacion = Estrategia::Estimacion.where(id: @estimacion).first
     if @estimacion.update(parametros)
       #Impresión del proceso satisfactorio
-      flash[:success] = "Estimaciión Actualizada Correctamente"
-      redirect_to estrategia_estimaciones_index_path(:proyecto_id => params[:proyecto_id])
+      flash[:success] = "Estimación Actualizada Correctamente"
     else
       #Impresión del proceso de error
       flash[:danger] = "No se pudo actualizar la estimación"
-      redirect_to estrategia_estimaciones_index_path(:proyecto_id => params[:proyecto_id])
     end
+      redirect_to estrategia_estimaciones_index_path(:proyecto_id => params[:proyecto_id])
   end
 
   def update

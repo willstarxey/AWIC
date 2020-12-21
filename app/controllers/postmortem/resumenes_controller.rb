@@ -110,71 +110,131 @@ class Postmortem::ResumenesController < ApplicationController
     @criterios_calidad_final = Implementacion::CriterioCalidad.joins(:colaborador).where("colaboradors.proyecto_id = ? and implementacion_criterios_calidad.ciclo = ?", proyecto_id, ciclo).to_json
 
     #Todas las pruebas aplicadas en el proyecto
-    #@total_pruebas = Pruebas::Prueba.find_by_sql(["SELECT * FROM pruebas_pruebas AS D JOIN (SELECT id FROM colaboradors WHERE proyecto_id = ?) AS C ON D.colaborador_id = C.id AND ciclo = ?", proyecto_id, ciclo])
     @total_pruebas = Pruebas::Prueba.joins(:colaborador).where("colaboradors.proyecto_id = ? AND pruebas_pruebas.ciclo = ?", proyecto_id, ciclo)
 
     #Código para matchear las metas enlazadas en todas las pruebas
-    @pruebas_metas = @total_pruebas.first.lanzamiento_metas
+    @pruebas_metas = []
     @total_pruebas.each do |prueba|
-      @pruebas_metas.match(prueba.lanzamiento_metas)
+      if !prueba.lanzamiento_metas.nil?
+        JSON.parse(prueba.lanzamiento_metas).each do |meta|
+          if !@pruebas_metas.include? meta
+            @pruebas_metas.push(meta)
+          end
+        end
+      end
     end
 
-    @pruebas_disenos = @total_pruebas.first.estrategia_disenos
+    @pruebas_disenos = []
     @total_pruebas.each do |prueba|
-      @pruebas_disenos.match(prueba.estrategia_disenos)
-    end
-    
-    @pruebas_criterios = @total_pruebas.first.estrategia_criterios
-    @total_pruebas.each do |prueba|
-      @pruebas_criterios.match(prueba.estrategia_criterios)
-    end
-
-    @pruebas_estimaciones = @total_pruebas.first.estrategia_estimaciones
-    @total_pruebas.each do |prueba|
-      @pruebas_estimaciones.match(prueba.estrategia_estimaciones)
+      if !prueba.estrategia_disenos.nil?
+        JSON.parse(prueba.estrategia_disenos).each do |diseno|
+          if !@pruebas_disenos.include? diseno
+            @pruebas_disenos.push(diseno)
+          end
+        end
+      end
     end
 
-    @pruebas_planes_calidad = @total_pruebas.first.planeacion_planes_calidad
+    @pruebas_criterios = []
     @total_pruebas.each do |prueba|
-      @pruebas_planes_calidad.match(prueba.planeacion_planes_calidad)
+      if !prueba.estrategia_criterios.nil?
+        JSON.parse(prueba.estrategia_criterios).each do |criterio|
+          if !@pruebas_criterios.include? criterio
+            @pruebas_criterios.push(criterio)
+          end
+        end
+      end
     end
 
-    @pruebas_requerimientos = @total_pruebas.first.requerimientos_requerimientos
+    @pruebas_estimaciones = []
     @total_pruebas.each do |prueba|
-      @pruebas_requerimientos.match(prueba.requerimientos_requerimientos)
+      if !prueba.estrategia_estimaciones.nil?
+        JSON.parse(prueba.estrategia_estimaciones).each do |estimacion|
+          if !@pruebas_estimaciones.include? estimacion
+            @pruebas_estimaciones.push(estimacion)
+          end
+        end
+      end
     end
 
-    @pruebas_estructuras = @total_pruebas.first.diseno_estructuras
+    @pruebas_planes_calidad = []
     @total_pruebas.each do |prueba|
-      @pruebas_estructuras.match(prueba.diseno_estructuras)
+      if !prueba.planeacion_planes_calidad.nil?
+        JSON.parse(prueba.planeacion_planes_calidad).each do |plan_calidad|
+          if !@pruebas_planes_calidad.include? plan_calidad
+            @pruebas_planes_calidad.push(plan_calidad)
+          end
+        end
+      end
     end
 
-    @pruebas_planes_pruebas = @total_pruebas.first.diseno_planes_pruebas
+    @pruebas_requerimientos = []
     @total_pruebas.each do |prueba|
-      @pruebas_planes_pruebas.match(prueba.diseno_planes_pruebas)
+      if !prueba.requerimientos_requerimientos.nil?
+        JSON.parse(prueba.requerimientos_requerimientos).each do |requerimiento|
+          if !@pruebas_requerimientos.include? requerimiento
+            @pruebas_requerimientos.push(requerimiento)
+          end
+        end
+      end
     end
 
-    @pruebas_estandares = @total_pruebas.first.diseno_estandares
+    @pruebas_estructuras = []
     @total_pruebas.each do |prueba|
-      @pruebas_estandares.match(prueba.diseno_estandares)
+      if !prueba.diseno_estructuras.nil?
+        JSON.parse(prueba.diseno_estructuras).each do |estructura|
+          if !@pruebas_estructuras.include? estructura
+            @pruebas_estructuras.push(estructura)
+          end
+        end
+      end
     end
 
-    @pruebas_criterios_calidad = @total_pruebas.first.implementacion_criterios_calidad
+
+    @pruebas_planes_pruebas = []
     @total_pruebas.each do |prueba|
-      @pruebas_criterios_calidad.match(prueba.implementacion_criterios_calidad)
+      if !prueba.diseno_planes_pruebas.nil?
+        JSON.parse(prueba.diseno_planes_pruebas).each do |plan_pruebas|
+          if !@pruebas_planes_pruebas.include? plan_pruebas
+            @pruebas_planes_pruebas.push(plan_pruebas)
+          end
+        end
+      end
+    end
+
+    @pruebas_estandares = []
+    @total_pruebas.each do |prueba|
+      if !prueba.diseno_estandares.nil?
+        JSON.parse(prueba.diseno_estandares).each do |estandar|
+          if !@pruebas_estandares.include? estandar
+            @pruebas_estandares.push(estandar)
+          end
+        end
+      end
+    end
+
+    @pruebas_criterios_calidad = []
+    @total_pruebas.each do |prueba|
+      if !prueba.implementacion_criterios_calidad.nil?
+        JSON.parse(prueba.implementacion_criterios_calidad).each do |criterio|
+          if !@pruebas_criterios_calidad.include? criterio
+            @pruebas_criterios_calidad.push(criterio)
+          end
+        end
+      end
     end
 
     #Codigo para encontrar las metas que no se hayan utilizado en el proyecto
-    @resumen_metas = JSON.parse(@metas_final).difference(JSON.parse(@pruebas_metas))
-    @resumen_disenos = JSON.parse(@disenos_final).difference(JSON.parse(@pruebas_disenos))
-    @resumen_criterios = JSON.parse(@disenos_final).difference(JSON.parse(@pruebas_disenos))
-    @resumen_estimaciones = JSON.parse(@estimaciones_final).difference(JSON.parse(@pruebas_estimaciones))
-    @resumen_planes_calidad = JSON.parse(@planes_calidad_final).difference(JSON.parse(@pruebas_planes_calidad))
-    @resumen_requerimientos = JSON.parse(@requerimientos_final).difference(JSON.parse(@pruebas_requerimientos))
-    @resumen_estructuras = JSON.parse(@estructuras_final).difference(JSON.parse(@pruebas_estructuras))
-    @resumen_planes_pruebas = JSON.parse(@planes_pruebas_final).difference(JSON.parse(@pruebas_planes_pruebas))
-    @resumen_estandares = JSON.parse(@estandares_final).difference(JSON.parse(@pruebas_estandares))
-    @resumen_criterios_calidad = JSON.parse(@criterios_calidad_final).difference(JSON.parse(@pruebas_criterios_calidad))
+    @resumen_metas = JSON.parse(@metas_final).difference(@pruebas_metas)
+    @resumen_disenos = JSON.parse(@disenos_final).difference(@pruebas_disenos)
+    @resumen_criterios = JSON.parse(@disenos_final).difference(@pruebas_disenos)
+    @resumen_estimaciones = JSON.parse(@estimaciones_final).difference(@pruebas_estimaciones)
+    @resumen_planes_calidad = JSON.parse(@planes_calidad_final).difference(@pruebas_planes_calidad)
+    @resumen_requerimientos = JSON.parse(@requerimientos_final).difference(@pruebas_requerimientos)
+    @resumen_estructuras = JSON.parse(@estructuras_final).difference(@pruebas_estructuras)
+    @resumen_planes_pruebas = JSON.parse(@planes_pruebas_final).difference(@pruebas_planes_pruebas)
+    @resumen_estandares = JSON.parse(@estandares_final).difference(@pruebas_estandares)
+    @resumen_criterios_calidad = JSON.parse(@criterios_calidad_final).difference(@pruebas_criterios_calidad)
     #Arreglo con las diferencias de los metodos empleados
     @resumen_procesos = [@resumen_metas, @resumen_disenos, @resumen_criterios, @resumen_estimaciones, @resumen_planes_calidad, @resumen_requerimientos, @resumen_estructuras, @resumen_planes_pruebas, @resumen_estandares, @resumen_criterios_calidad]
     #Retorno de un arreglo con las procesos no empleados en el proyecto
@@ -182,7 +242,7 @@ class Postmortem::ResumenesController < ApplicationController
   end
 
   def parametros
-    params.permit(:ciclo, :ciclo_actual, :proyecto_id)
+    params.permit(:ciclo, :ciclo_actual, :proyecto_id, :detalles)
   end
 
 end
