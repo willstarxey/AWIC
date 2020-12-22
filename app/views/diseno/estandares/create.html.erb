@@ -37,7 +37,7 @@
                                 <select type="select" class="form-control" name="diseno_tipo_estandar_id" id="diseno_tipo_estandar_id" required>
                                     <option value="" selected>Seleccione un tipo de estándar</option>
                                     <% @tipo_estandares.each do |tipo_estandar| %>
-                                        <option value="<%=tipo_estandar.id%>"><%=tipo_estandar.descripcion%></option>
+                                        <option value="<%=tipo_estandar.id%>"><%=tipo_estandar.nombre%></option>
                                     <% end %>
                                 </select>
                             </div>
