@@ -36,7 +36,7 @@ class Diseno::EstandaresController < ApplicationController
     @colaborador = Colaborador.where(proyecto_id: params[:proyecto_id], user_id: current_user.id).first
     @estandar = Diseno::Estandar.new(parametros)
     #obteniendo el ciclo del proyecto
-    @estandar.diseno_tipo_estandar_id = params[:diseno_tipo_estandar_id];
+    @estandar.diseno_tipo_estandar_id = Diseno::TipoEstandar.find(params[:diseno_tipo_estandar_id]);
     @estandar.ciclo = Proyecto.find(params[:proyecto_id]).ciclo_actual
     @estandar.colaborador_id = @colaborador.id
     if(@estandar.save)
